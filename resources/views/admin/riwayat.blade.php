@@ -1,24 +1,8 @@
 @extends('admin.base')
 
-@section('page-title', "Daftar Pengajuan Surat")
+@section('title', "Daftar Pengajuan Surat")
 
 @section('main')
-    <div class="row">
-        <ol class="breadcrumb">
-            <li>
-                <a href="#"><em class="fas fa-home"></em></a>
-            </li>
-            <li class="active">Data Surat</li>
-        </ol>
-    </div><!--sitemap-->
-    
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Data Pengajuan Surat</h1>
-        </div>
-    </div>
-    <!--page header-->
-
     <!-- <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -90,11 +74,9 @@
     
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <surat type='semua'></surat>
-                    </div>
+            <div class="card">
+                <div class="card-body">
+                    <surat type='semua'></surat>
                 </div>
             </div>
         </div>

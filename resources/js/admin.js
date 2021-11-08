@@ -1,21 +1,4 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require("./bootstrap");
-
-window.Vue = require("vue");
-
-import route from "ziggy";
-import { Ziggy } from "./ziggy";
-
-Vue.mixin({
-    methods: {
-        route: (name, params, absolute) => route(name, params, absolute, Ziggy)
-    }
-});
+require("./admin.bootstrap");
 
 /**
  * The following block of code may be used to automatically register your
@@ -39,3 +22,5 @@ Vue.component("surat", require("./components/Surat.vue").default);
 const app = new Vue({
     el: "#app"
 });
+
+require("./admin.modals");

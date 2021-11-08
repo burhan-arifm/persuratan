@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+// Auth::routes(['register' => false]);
+Route::group(['prefix' => 'login'], function () {
+    Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('/', 'Auth\LoginController@login');
+});
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'pengajuan'], function ()
 {

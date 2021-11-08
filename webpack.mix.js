@@ -1,4 +1,5 @@
 const mix = require("laravel-mix");
+const path = require("path");
 
 /*
  |--------------------------------------------------------------------------
@@ -12,28 +13,20 @@ const mix = require("laravel-mix");
  */
 
 mix.webpackConfig({
-  resolve: {
-    alias: {
-      ziggy: path.resolve("vendor/tightenco/ziggy/dist/index.js"),
-    },
-  },
+    resolve: {
+        alias: {
+            ziggy: path.resolve("vendor/tightenco/ziggy/dist")
+        }
+    }
 });
 
-mix
-  .js("resources/js/app.js", "public/js")
-  .scripts(
-    [
-      "resources/js/datetimepicker.js",
-      "resources/js/form-masking.js",
-      "resources/js/icon-toggle.js",
-      "resources/js/logout-trigger.js",
-      "resources/js/select.js",
-    ],
-    "public/js/custom.js"
-  )
-  .extract()
-  .sass("resources/sass/app.scss", "public/css")
-  .styles(
-    ["resources/css/admin.css", "resources/css/login.css"],
-    "public/css/style.css"
-  );
+mix.js("resources/js/core.js", "public/js")
+    .js("resources/js/admin.js", "public/js")
+    .js("resources/js/form.js", "public/js")
+    .extract(["jquery", "popper.js", "bootstrap"], "public/js/vendor.core.js")
+    .extract(
+        ["axios", "vue", "laravel-echo", "pusher-js", "howler", "ziggy"],
+        "public/js/vendor.admin.js"
+    )
+    .sass("resources/sass/app.scss", "public/css")
+    .sass("resources/sass/login.scss", "public/css");

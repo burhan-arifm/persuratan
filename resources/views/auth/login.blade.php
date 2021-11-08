@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
-@section('page-title', 'Masuk')
+@section('page-title', 'Masuk | SIMDAK-FIDKOM UIN Sunan Gunung Djati Bandung')
 
-@section('content')
+@section('additional-css')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
+
+@section('body')
     <div class="container align-items-center">
-        <div id="loginwrapper" class="row justify-content-center align-items-center">
+        <div id="loginwrapper" class="row justify-content-center align-items-center vh-100">
             <div class="col-md-2 mb-2 mr-2 align-items-center">
                 <div class="row align-items-center">
                     <picture class="mx-auto my-auto">
@@ -13,16 +17,15 @@
                     </picture>
                 </div>
             </div>
+            <div class="vertical-ruler"></div>
             <div class="col-md-4">
-                <div class="card @if($errors->has('email') || $errors->has('nip')) is-invalid @endif">
-                    <div class="card-header">Log In</div>
+                <div class="card border-0 @if($errors->has('email') || $errors->has('nip')) is-invalid @endif">
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <fieldset>
                                 <div class="form-group">
                                     <input id="identity" class="form-control" placeholder="NIP" name="identity" type="text" autofocus required autocomplete>
-
                                     @if($errors->get('email') || $errors->get('nip'))
                                         <span class="invalid-feedback" role="alert">
                                         @foreach ($errors->all() as $error)
@@ -33,7 +36,6 @@
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control @error('password') is-invalid @enderror" placeholder="Password" type="password" name="password" required autocomplete>
-                                    
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

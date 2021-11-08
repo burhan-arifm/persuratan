@@ -25,6 +25,7 @@
     "dependencies": {
         "howler": "^2.2.1",
         "laravel-echo": "^1.10.0",
-        "pusher-js": "^7.0.3"
+        "pusher-js": "^7.0.3",
+        "sweetalert2": "^11.1.9"
     }
 }
