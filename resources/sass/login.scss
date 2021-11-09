@@ -1,8 +1,13 @@
+body,
+.card {
+    background-color: #fbf5f3;
+}
+
 body {
-    background-color: #fefefd;
+    height: 100vh;
 }
 
 .vertical-ruler {
-    border-right: 4px solid #7e300080;
-    height: 50%;
+    border-right: 2px solid #7e30004d;
+    height: 250px;
 }

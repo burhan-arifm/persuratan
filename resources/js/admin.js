@@ -12,6 +12,7 @@ require("./admin.bootstrap");
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component("surat", require("./components/Surat.vue").default);
+Vue.component("surat-row", require("./components/SuratRow.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

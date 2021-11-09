@@ -29,4 +29,5 @@ mix.js("resources/js/core.js", "public/js")
         "public/js/vendor.admin.js"
     )
     .sass("resources/sass/app.scss", "public/css")
+    .sass("resources/sass/form.scss", "public/css")
     .sass("resources/sass/login.scss", "public/css");
