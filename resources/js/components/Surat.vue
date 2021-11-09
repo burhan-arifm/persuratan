@@ -12,7 +12,9 @@
                 />
             </div>
         </div>
-        <table class="table table-bordered table-striped table-hover">
+        <table
+            class="table table-bordered table-striped table-hover table-responsive table-sm"
+        >
             <thead>
                 <tr>
                     <th>No.</th>
@@ -29,6 +31,7 @@
                         :surat="surat"
                         :index="index"
                         :csrf_token="csrf_token"
+                        :type="type"
                     ></surat-row>
                 </tr>
             </tbody>
@@ -48,6 +51,7 @@
 
 <script>
 import SuratRow from "./SuratRow.vue";
+import { Howl } from "howler";
 
 export default {
     props: ["current", "type"],
@@ -76,10 +80,16 @@ export default {
     },
     methods: {
         fetchSurat() {
-            axios
-                .get(this.route("data_surat." + this.type))
-                .then(response => {
-                    this.letters = response.data;
+            fetch(this.route("data_surat." + this.type), {
+                method: "GET",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": this.csrf_token
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    this.letters = data;
                     if (
                         this.type == "terbaru" &&
                         this.letters.length > 0 &&

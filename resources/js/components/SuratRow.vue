@@ -4,10 +4,10 @@
         <td>{{ surat.nomor_surat }}</td>
         <td>{{ surat.identitas }} - {{ surat.pemohon }}</td>
         <td>{{ surat.jenis_surat }}</td>
-        <td>{{ surat.waktu_readable }}</td>
+        <td>{{ waktu_readable }}</td>
         <td>
             <a
-                id="cetak-{{surat.id}}"
+                :id="`cetak-${surat.id}`"
                 title="Cetak Surat"
                 :href="route('surat.cetak', { id: surat.id })"
                 class="btn btn-sm btn-primary"
@@ -18,7 +18,7 @@
                 <span v-show="showContent1">Cetak Surat</span>
             </a>
             <a
-                id="sunting-{{surat.id}}"
+                :id="`sunting-${surat.id}`"
                 title="Sunting Surat"
                 :href="route('surat.sunting', { id: surat.id })"
                 class="btn btn-sm btn-primary"
@@ -29,7 +29,7 @@
                 <span v-show="showContent2">Sunting Surat</span>
             </a>
             <a
-                id="hapus-{{surat.id}}"
+                :id="`hapus-${surat.id}`"
                 title="Hapus Surat"
                 href="#"
                 @click="hapusSurat(surat.id, csrf_token)"
@@ -45,7 +45,15 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
+import "dayjs/locale/id";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { Fragment } from "vue-fragment";
+
+dayjs.locale("id");
+dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
 
 export default {
     components: {
@@ -54,7 +62,8 @@ export default {
     props: {
         surat: Object,
         index: Number,
-        csrf_token: String
+        csrf_token: String,
+        type: String
     },
     data() {
         return {
@@ -102,6 +111,15 @@ export default {
                         });
                 }
             });
+        }
+    },
+    computed: {
+        waktu_readable() {
+            if (this.type === "terbaru") {
+                return dayjs(this.surat.waktu).fromNow();
+            }
+
+            return dayjs(this.surat.waktu).format("LLLL");
         }
     }
 };

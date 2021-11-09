@@ -27,7 +27,6 @@ class Formatter
             'jenis_surat'    => $surat->jenis->jenis_surat,
             'identitas'      => ($surat->jenis_surat == 'izin-kunjungan') ? $surat->izin_kunjungan->program_studi : $surat->mahasiswa->nim,
             'pemohon'        => ($surat->jenis_surat == 'izin-kunjungan') ? $surat->izin_kunjungan->semester.'-'.$surat->izin_kunjungan->kelas : $surat->mahasiswa->nama,
-            'waktu_readable' => ($tampilkan == 'semua') ? $time->isoFormat('LLLL') : $time->diffForHumans(),
             'waktu'          => $surat->updated_at
         );
 

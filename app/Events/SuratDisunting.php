@@ -39,8 +39,11 @@ class SuratDisunting implements ShouldBroadcast
     public function broadcastWith()
     {
         $this->surat->jenis;
-        $this->surat->mahasiswa;
-        $this->surat->izin_kunjungan;
+        if ($this->surat->jenis_surat != 'izin-kunjungan') {
+            $this->surat->mahasiswa;
+        } else {
+            $this->surat->izin_kunjungan;
+        }
 
         return [
             'surat' => \Format::surat_table($this->surat, 'terbaru')

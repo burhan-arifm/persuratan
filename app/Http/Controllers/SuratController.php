@@ -40,9 +40,7 @@ class SuratController extends Controller
                 ['nim' => $request->nim],
                 ['nama' => $request->nama_mahasiswa,
                  'program_studi' => $request->program_studi,
-                //  'tanggal_lahir' => \Carbon\Carbon::parseFromLocale($request->tanggal_lahir, config('app.locale'))->format("Y-m-d"),
                  'alamat' => $request->alamat,
-                //  'no_telepon' => $request->no_telepon
                 ]
             );
             $pemohon = $mahasiswa->nim;
@@ -166,8 +164,7 @@ class SuratController extends Controller
     public function detail($id)
     {
         $surat = Surat::find($id);
-        // $batch = substr($surat->mahasiswa->nim, 1, 2);
-        $batch = 16;
+        $batch = substr($surat->mahasiswa->nim, 1, 2);
         $enroll = \Carbon\Carbon::createFromFormat('j n y', "1 7 $batch", config('app.timezone'));
         $time = \Carbon\Carbon::now();
         $roman_semester = number_to_roman($enroll->diffInMonths($time) / 6 + 1);
@@ -206,9 +203,6 @@ class SuratController extends Controller
         event(new \App\Events\SuratDiproses($surat));
 
         return view("surat.cetak.$surat->jenis_surat", ['surat' => $surat]);
-        // $pdf = \PDF::loadView("surat.cetak.$surat->jenis_surat", ['surat' => $surat]);
-        // return $pdf->stream($time."_".$surat->jenis_surat."_".$surat->mahasiswa->nim."_".$surat->mahasiswa->nama.".pdf");
-        // $time."_".$surat->jenis_surat."_".$surat->mahasiswa->nim."_".$surat->mahasiswa->nama.".pdf"
     }
 
     public function sunting($id, Request $request)
@@ -236,10 +230,8 @@ class SuratController extends Controller
                 ['nim'           => $request->nim],
                 ['nama'          => $request->nama_mahasiswa,
                  'program_studi' => $request->program_studi,
-                //  'tanggal_lahir' => \Carbon\Carbon::parseFromLocale($request->tanggal_lahir, config('app.locale'))->format("Y-m-d"),
                  'alamat'        => $request->alamat,
-                //  'no_telepon' => $request->no_telepon
-                 ]
+                ]
             );
             $pemohon = $mahasiswa->nim;
 
@@ -375,6 +367,6 @@ class SuratController extends Controller
 
         Surat::destroy($id);
 
-        return back();
+        return response()->status(200);
     }
 }

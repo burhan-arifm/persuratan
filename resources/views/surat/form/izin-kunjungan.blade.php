@@ -2,7 +2,7 @@
 
 @section('form-name', "Izin Kunjungan")
 
-@section('additional-css')
+@section('additional-css-2')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.39.0/build/css/tempusdominus-bootstrap-4.min.css">
 @endsection
 
