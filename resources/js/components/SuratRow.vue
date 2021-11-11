@@ -11,22 +11,20 @@
                 title="Cetak Surat"
                 :href="route('surat.cetak', { id: surat.id })"
                 class="btn btn-sm btn-primary"
-                @mouseover="showContent1 = true"
-                @mouseleave="showContent1 = false"
+                :data-toggle="tooltip"
+                :data-placement="top"
             >
                 <em class="fas fa-print"></em>
-                <span v-show="showContent1">Cetak Surat</span>
             </a>
             <a
                 :id="`sunting-${surat.id}`"
                 title="Sunting Surat"
                 :href="route('surat.sunting', { id: surat.id })"
                 class="btn btn-sm btn-primary"
-                @mouseover="showContent2 = true"
-                @mouseleave="showContent2 = false"
+                data-toggle="tooltip"
+                data-placement="top"
             >
                 <em class="fas fa-edit"></em>
-                <span v-show="showContent2">Sunting Surat</span>
             </a>
             <a
                 :id="`hapus-${surat.id}`"
@@ -34,11 +32,10 @@
                 href="#"
                 @click="hapusSurat(surat.id, csrf_token)"
                 class="btn btn-sm btn-danger"
-                @mouseover="showContent3 = true"
-                @mouseleave="showContent3 = false"
+                data-toggle="tooltip"
+                data-placement="top"
             >
                 <em class="fas fa-trash"></em>
-                <span v-show="showContent3">Hapus Surat</span>
             </a>
         </td>
     </fragment>
@@ -64,13 +61,6 @@ export default {
         index: Number,
         csrf_token: String,
         type: String
-    },
-    data() {
-        return {
-            showContent1: false,
-            showContent2: false,
-            showContent3: false
-        };
     },
     methods: {
         hapusSurat(id_surat, token) {

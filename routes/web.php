@@ -21,7 +21,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'pengajuan'], function ()
 {
-    Route::view('/', 'surat.form.index', ['tipe_surat' => \App\JenisSurat::all()]);
+    Route::view('/', 'surat.form.index', ['tipe_surat' => \App\JenisSurat::all()])->name('pengajuan.index');
     Route::get('{kode_surat}', 'SuratController@formPengajuan')->name('form_surat');
     Route::post('ajukan', 'SuratController@ajukan')->name('ajukan_surat');
 });

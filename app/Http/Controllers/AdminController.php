@@ -23,22 +23,11 @@ class AdminController extends Controller
         $time = \Carbon\Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);
         $nomor_surat = sprintf("B-%04u/Un.05/III.4/TL.10/%02u/%u", $surat->nomor_surat, $time->month, $time->year);
         $surat->nomor_surat = $nomor_surat;
-        $surat->tanggal_terbit = $time->isoFormat('LL');
-        $tanggal = "";
-
-        switch($surat->jenis_surat) {
-            case 'izin-kunjungan':
-                $tanggal = \Carbon\Carbon::createFromFormat('Y-m-d', $surat->izin_kunjungan->tanggal_kunjungan);
-                $surat->izin_kunjungan->tanggal_kunjungan = $tanggal->isoFormat('LL');
-            break;
-
-            default:
-        }
+        $surat->tanggal_terbit = $time;
 
         return view("admin.sunting.$surat->jenis_surat", [
             'surat' => $surat,
             'program_studi' => \App\ProgramStudi::all(),
-            // 'pemohon' => $surat->pemohon
             ]);
     }
 

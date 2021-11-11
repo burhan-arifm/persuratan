@@ -1,73 +1,70 @@
-@extends('admin.base')
+@extends("admin.base")
 
-@section('page-title', "Sunting Surat")
+@section('title')
+    Sunting Pengajuan Surat @yield('form-name')
+@endsection
+
+@section('additional-css')
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.8/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.5.2/dist/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.39.0/build/css/tempusdominus-bootstrap-4.min.css">    @yield('css')
+@endsection
 
 @section('main')
-	<div class="row">
-		<ol class="breadcrumb">
-			<li>
-				<a href="#"><em class="fa fa-home"></em></a>
-			</li>
-			<li class="active">Sunting Surat</li>
-			<li class="active">@yield('page-name')</li>
-		</ol>
-	</div><!--sitemap-->
-	
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Sunting Surat @yield('page-name')</h1>
-		</div>
-	</div><!--header-->
-	
-	<div class="panel panel-container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="alert bg-danger" role="alert"><em class="fas fa-exclamation-triangle">&nbsp;</em> Perhatian! Penulisan Instansi tujuan harus jelas. </em></div>
-						<div>Isi form dibawah ini secara lengkap.</div>
-						<div>
-							<div class="panel-body">
-								<form id="pengajuan-surat" class="form-horizontal" action="{{ route('surat.edit', ['id' => $surat->id ]) }}" method="post">
-									<fieldset>
-										@method('PUT')
-										@csrf
-										<div class="form-group">
-											<label class="col-md-3 control-label" for="nomor_surat">Nomor Surat</label>
-											<div class="col-md-6">
-												<input id="nomor_surat" name="nomor_surat" type="text" placeholder="Nomor Surat" value="{{ $surat->nomor_surat }}" class="form-control">
-											</div>
-										</div><!--nomor surat-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{route('ajukan_surat')}}" method="post" id="pengajuan-surat" class="form-horizontal">
+                        <fieldset>
+                            @csrf
+                
+                            <div class="form-group">
+                                <label class="col-md-6" for="nomor_surat">Nomor Surat</label>
+                                <div class="col-auto">
+                                    <input id="nomor_surat" name="nomor_surat" type="text" class="form-control" value="{{ $surat->nomor_surat }}">
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="col-md-6" for="tanggal_terbit">Tanggal Terbit</label>
+                                <div class="col-auto">
+                                    <input id="tanggal_terbit" type="text" class="form-control datetimepicker-input" name="tanggal_terbit" data-toggle="datetimepicker" data-target="#tanggal_terbit">
+                                </div>
+                            </div>
+                            @yield('form')
+                
+                            <div class="form-group d-flex justify-space-around">
+                                <div class="col-md-5">
+                                    <button type="submit" class="btn btn-primary">Ajukan</button>
+                                </div>
+                                <div class="flex-fill"></div>
+                                <div class="col-md-5 align-items-end">
+                                    <button type="reset" class="btn btn-outline-secondary btn-md">Kosongkan</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
-										<div class="form-group">
-											<label class="col-md-3 control-label" for="tanggal_terbit">Tanggal Terbit Surat</label>
-											<div class="col-md-6">
-												<div class="input-group date">
-													<div class="input-group-addon">
-														<span class="glyphicon glyphicon-th"></span>
-													</div>
-													<input type="text" class="form-control datepicker" name="tanggal_terbit"value="{{ $surat->tanggal_terbit }}">
-												</div>
-											</div>
-										</div>
-
-										@yield('components')
-										<!-- Form actions -->
-										<div class="form-group">
-											<div class="col-md-6 widget-right">
-												<button type="submit" class="btn btn-primary btn-md pull-right">Simpan</button>
-											</div>
-											<div class="col-md-6 widget-right">
-												<button type="reset" class="btn btn-danger btn-md pull-left">Reset</button>
-											</div>
-										</div>
-									</fieldset>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div><!--body content-->
+@section('scripts')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.8/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.39.0/build/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/form.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#tanggal_terbit').datetimepicker({
+                defaultDate: "{{ $surat->tanggal_terbit }}",
+                locale: "id-ID",
+                format: "dddd, DD MMMM YYYY"
+            });
+        });
+    </script>
+	@yield('additional-scripts-2')
 @endsection

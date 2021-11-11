@@ -159,4 +159,5 @@
 @section('additional-scripts')
     <script type="text/javascript" src="{{ asset('js/vendor.admin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
+    @yield('scripts')
 @endsection

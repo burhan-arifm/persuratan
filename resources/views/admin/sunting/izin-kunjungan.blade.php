@@ -1,91 +1,99 @@
 @extends('admin.sunting.base')
 
-@section('page-name', 'Izin Kunjungan')
+@section('form-name', "Izin Kunjungan")
 
-@section('components')
-<input type="hidden" name="tipe_surat" value="izin-kunjungan">
-<fieldset>
+@section('form')
+    <input type="hidden" name="tipe_surat" value="izin-kunjungan">
+
     <div class="form-group">
-        <label class="col-md-3 control-label" for="instansi_penerima">Tujuan Kunjungan</label>
-        <div class="col-md-6">
-            <input id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Nama Tujuan Observasi Ex: PT Jaya Abadi" class="form-control" value="{{ $surat->izin_kunjungan->instansi_penerima }}">
+        <label class="col-md-6" for="instansi_penerima">Tujuan Kunjungan</label>
+        <div class="col-auto">
+            <input id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Contoh: PT Jaya Abadi" class="form-control" data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top" value="{{ $surat->izin_kunjungan->instansi_penerima }}">
         </div>
     </div>
 
-<div class="form-group">
-    <label class="col-md-3 control-label" for="alamat_instansi">Alamat Kunjungan</label>
-    <div class="col-md-6">
-        <textarea class="form-control" id="alamat_instansi" name="alamat_instansi" placeholder="Alamat Instansi Ex:Jl.A.H Nasution No.05" rows="3">{{ $surat->izin_kunjungan->instansi_penerima }}</textarea>
-        <div class="form-group" style="margin-bottom: 0; margin-top: 15px;">
-            <label class="col-md-4 control-label" for="kota_instansi">Kota/Kabupaten</label>
-            <div class="col-md-8">
-                <input id="kota_instansi" name="kota_instansi" type="text" placeholder="Kota tempat instansi berada" class="form-control" value="{{ $surat->izin_kunjungan->kota_instansi }}">
-            </div>
+    <div class="form-group">
+        <label class="col-md-6" for="alamat_instansi">Alamat Kunjungan</label>
+        <div class="col-auto">
+            <textarea class="form-control" id="alamat_instansi" name="alamat_instansi" placeholder="Contoh: Jl.A.H Nasution No.05" rows="3" data-toggle="tooltip" title="Masukkan alamat instansi tempat pelaksanaan" data-placement="top">{{ $surat->izin_kunjungan->alamat_instansi }}</textarea>
         </div>
     </div>
-</div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label" for="mata_kuliah">Mata Kuliah</label>
-        <div class="col-md-6">
-            <input id="mata_kuliah" name="mata_kuliah" type="text" placeholder="Mata Kuliah" class="form-control" value="{{ $surat->izin_kunjungan->mata_kuliah }}">
+        <label class="col-md-4" for="kota_instansi">Kota/Kabupaten</label>
+        <div class="col-auto">
+            <input id="kota_instansi" name="kota_instansi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top" value="{{ $surat->izin_kunjungan->kota_instansi }}">
         </div>
     </div>
-    
+
     <div class="form-group">
-        <label class="col-md-3 control-label" for="dosen_pengampu">Dosen Pengampu</label>
-        <div class="col-md-6">
-            <input id="dosen_pengampu" name="dosen_pengampu" type="text" placeholder="Nama Dosen Pengampu Mata Kuliah" class="form-control" value="{{ $surat->izin_kunjungan->dosen_pengampu }}">
+        <label class="col-md-6" for="mata_kuliah">Mata Kuliah</label>
+        <div class="col-auto">
+            <input id="mata_kuliah" name="mata_kuliah" type="text" placeholder="Contoh: Etika Jurnalisme" class="form-control" data-toggle="tooltip" title="Masukkan nama mata kuliah" data-placement="top" value="{{ $surat->izin_kunjungan->mata_kuliah }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-6" for="dosen_pengampu">Dosen Pengampu</label>
+        <div class="col-auto">
+            <input id="dosen_pengampu" name="dosen_pengampu" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pengampu beserta gelar akademisnya." data-placement="top" value="{{ $surat->izin_kunjungan->dosen_pengampu }}">
         </div>
     </div>
 
 	<div class="form-group">
-		<label class="col-md-3 control-label" for="program_studi">Program Studi</label>
-		<div class="col-md-6">
-		<select id="program_studi" name="program_studi" class="form-control selector" form="pengajuan-surat" data-width="100%">
-			<option disabled selected hidden>Pilih Program Studi Anda</option>
-			@foreach($program_studi as $prodi)
-			    <option value="{{ $prodi->kode_prodi }}" {{ ( $surat->izin_kunjungan->program_studi == $prodi->kode_prodi) ? 'selected' : '' }}>{{ $prodi->program_studi }}</option>
-			@endforeach
-		</select>
+		<label class="col-md-6" for="program_studi">Program Studi</label>
+		<div class="col-auto">
+            <select id="program_studi" name="program_studi" class="form-control selector" form="pengajuan-surat" data-width="100%">
+                @foreach($program_studi as $prodi)
+                <option {{ $surat->izin_kunjungan->program_studi == $prodi->kode_prodi ? 'selected ' : '' }}value="{{ $prodi->kode_prodi }}">{{ $prodi->program_studi }}</option>
+                @endforeach
+            </select>
 		</div>
 	</div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label" for="semester">Semester</label>
-        <div class="col-md-6">
-            <input id="semester" name="semester" type="text" placeholder="Isi dengan semester yang Anda jalani. Contoh: VIII" class="form-control" value="{{ $surat->izin_kunjungan->semester }}">
+        <label class="col-md-6" for="semester">Semester</label>
+        <div class="col-auto">
+            <input id="semester" name="semester" type="text" placeholder="Contoh: I, IV, VI" class="form-control" data-toggle="tooltip" title="Masukkan semester yang dijalani dalam angka romawi kapital." data-placement="top" value="{{ $surat->izin_kunjungan->semester }}">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label" for="kelas">Kelas</label>
-        <div class="col-md-6">
-            <input id="kelas" name="kelas" type="text" placeholder="Kelas Mata Kuliah" class="form-control" value="{{ $surat->izin_kunjungan->kelas }}">
+        <label class="col-md-6" for="kelas">Kelas</label>
+        <div class="col-auto">
+            <input id="kelas" name="kelas" type="text" placeholder="Contoh: A, B, C" class="form-control" data-toggle="tooltip" title="Masukkan kelas dengan huruf kapital." data-placement="top" value="{{ $surat->izin_kunjungan->kelas }}">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label" for="tanggal_kunjungan">Tanggal Kunjungan</label>
-        <div class="col-md-6">
-            <div class="input-group date">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
-                <input type="text" class="form-control datepicker" name="tanggal_kunjungan"value="{{ $surat->izin_kunjungan->tanggal_kunjungan }}">
-            </div>
+        <label class="col-md-6" for="tanggal_kunjungan">Tanggal Kunjungan</label>
+        <div class="col-auto">
+            <input id="date" type="text" class="form-control datetimepicker-input" name="tanggal_kunjungan" data-toggle="datetimepicker" data-target="#date">
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label" for="waktu_kunjungan">Jam Kunjungan</label>
-        <div class="col-md-6">
-            <div class="input-group time">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
-                <input id="waktu_kunjungan" name="waktu_kunjungan" type="text" placeholder="Ex : 17:00 WIB" class="form-control datepicker"value="{{ $surat->izin_kunjungan->waktu_kunjungan }}">
-            </div>
+        <label class="col-md-3" for="waktu_kunjungan">Jam</label>
+        <div class="col-auto">
+            <input id="time" type="text" class="form-control datetimepicker-input" name="waktu_kunjungan" data-toggle="datetimepicker" data-target="#time">
         </div>
     </div>
+@endsection
+
+@section('additional-scripts-2')
+    <script type="text/javascript">
+        $(function () {
+            const datetime = "{{ $surat->izin_kunjungan->tanggal_kunjungan }} {{ $surat->izin_kunjungan->waktu_kunjungan }}"
+            $('#date').datetimepicker({
+                defaultDate: datetime,
+                locale: "id-ID",
+                format: "dddd, DD MMMM YYYY"
+            });
+            $('#time').datetimepicker({
+                defaultDate: datetime,
+                locale: "id-ID",
+                format: "HH:mm"
+            });
+        });
+    </script>
 @endsection

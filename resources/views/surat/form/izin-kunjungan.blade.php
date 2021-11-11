@@ -12,35 +12,35 @@
     <div class="form-group">
         <label class="col-md-6" for="instansi_penerima">Tujuan Kunjungan</label>
         <div class="col-auto">
-            <input id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Nama Tujuan Observasi Ex: PT Jaya Abadi" class="form-control">
+            <input id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Contoh: PT Jaya Abadi" class="form-control" data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-6" for="alamat_instansi">Alamat Kunjungan</label>
         <div class="col-auto">
-            <textarea class="form-control" id="alamat_instansi" name="alamat_instansi" placeholder="Alamat Instansi Ex:Jl.A.H Nasution No.05" rows="3"></textarea>
+            <textarea class="form-control" id="alamat_instansi" name="alamat_instansi" placeholder="Contoh: Jl.A.H Nasution No.05" rows="3" data-toggle="tooltip" title="Masukkan alamat instansi tempat pelaksanaan" data-placement="top"></textarea>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-4" for="kota_instansi">Kota/Kabupaten</label>
         <div class="col-auto">
-            <input id="kota_instansi" name="kota_instansi" type="text" placeholder="Kota tempat instansi berada" class="form-control">
+            <input id="kota_instansi" name="kota_instansi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-6" for="mata_kuliah">Mata Kuliah</label>
         <div class="col-auto">
-            <input id="mata_kuliah" name="mata_kuliah" type="text" placeholder="Mata Kuliah" class="form-control">
+            <input id="mata_kuliah" name="mata_kuliah" type="text" placeholder="Contoh: Etika Jurnalisme" class="form-control" data-toggle="tooltip" title="Masukkan nama mata kuliah" data-placement="top">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-6" for="dosen_pengampu">Dosen Pengampu</label>
         <div class="col-auto">
-            <input id="dosen_pengampu" name="dosen_pengampu" type="text" placeholder="Nama Dosen Pengampu Mata Kuliah" class="form-control">
+            <input id="dosen_pengampu" name="dosen_pengampu" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pengampu beserta gelar akademisnya." data-placement="top">
         </div>
     </div>
 
@@ -59,14 +59,14 @@
     <div class="form-group">
         <label class="col-md-6" for="semester">Semester</label>
         <div class="col-auto">
-            <input id="semester" name="semester" type="text" placeholder="Isi dengan semester yang Anda jalani. Contoh: VIII" class="form-control">
+            <input id="semester" name="semester" type="text" placeholder="Contoh: I, IV, VI" class="form-control" data-toggle="tooltip" title="Masukkan semester yang dijalani dalam angka romawi kapital." data-placement="top">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-6" for="kelas">Kelas</label>
         <div class="col-auto">
-            <input id="kelas" name="kelas" type="text" placeholder="Kelas Mata Kuliah" class="form-control">
+            <input id="kelas" name="kelas" type="text" placeholder="Contoh: A, B, C" class="form-control" data-toggle="tooltip" title="Masukkan kelas dengan huruf kapital." data-placement="top">
         </div>
     </div>
 

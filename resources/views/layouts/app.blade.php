@@ -28,7 +28,6 @@
     @yield('body')
 
     <!--Javascript Dependencies-->
-    @routes
     <script type="text/javascript" src="{{ asset('js/manifest.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/vendor.core.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/core.js') }}"></script>
