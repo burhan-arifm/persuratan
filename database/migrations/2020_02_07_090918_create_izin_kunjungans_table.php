@@ -14,7 +14,7 @@ class CreateIzinKunjungansTable extends Migration
     public function up()
     {
         Schema::create('izin_kunjungans', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->string('instansi_penerima');
             $table->text('alamat_instansi');
             $table->string('kota_instansi');

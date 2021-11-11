@@ -14,7 +14,7 @@ class CreateIzinObservasisTable extends Migration
     public function up()
     {
         Schema::create('izin_observasis', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->string('lokasi_observasi');
             $table->text('alamat_lokasi');
             $table->string('kota_lokasi');

@@ -19,7 +19,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Dr. H. Enjang AS, M.Ag., M.Si.',
             'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
+            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Permohonan Izin Observasi
         DB::table('jenis_surats')->insert([
@@ -29,7 +31,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Dr. H. Enjang AS, M.Ag., M.Si.',
             'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
+            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Permohonan Izin Praktik Mata Kuliah
         DB::table('jenis_surats')->insert([
@@ -39,7 +43,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Dr. H. Enjang AS, M.Ag., M.Si.',
             'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
+            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Permohonan Izin Riset
         DB::table('jenis_surats')->insert([
@@ -49,7 +55,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Dr. H. Enjang AS, M.Ag., M.Si.',
             'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
+            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Permohonan Izin Job Training
         DB::table('jenis_surats')->insert([
@@ -59,7 +67,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Dr. H. Enjang AS, M.Ag., M.Si.',
             'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
+            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Permohonan Uji Komprehensif
         DB::table('jenis_surats')->insert([
@@ -69,7 +79,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => '',
             'penanda_tangan' => '',
             'nip_penanda_tangan' => '',
-            'jabatan_penanda_tangan' => ''
+            'jabatan_penanda_tangan' => '',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Permohonan Ujian Munaqasah
         DB::table('jenis_surats')->insert([
@@ -79,7 +91,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => '',
             'penanda_tangan' => '',
             'nip_penanda_tangan' => '',
-            'jabatan_penanda_tangan' => ''
+            'jabatan_penanda_tangan' => '',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Pernyataan Masih Kuliah
         DB::table('jenis_surats')->insert([
@@ -89,7 +103,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Asep Rohendi, M.Ag.',
             'nip_penanda_tangan' => '196209101991031002',
-            'jabatan_penanda_tangan' => 'Kepala Bagian Tata Usaha'
+            'jabatan_penanda_tangan' => 'Kepala Bagian Tata Usaha',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Permohonan Izin PPM
         DB::table('jenis_surats')->insert([
@@ -99,7 +115,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Dr. H. Enjang AS, M.Ag., M.Si.',
             'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
+            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         // Surat Keterangan
         DB::table('jenis_surats')->insert([
@@ -109,7 +127,9 @@ class JenisSuratSeeder extends Seeder
             'atas_nama' => 'Dekan',
             'penanda_tangan' => 'Dadan Suherdiana',
             'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Kemahasiswaan'
+            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Kemahasiswaan',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

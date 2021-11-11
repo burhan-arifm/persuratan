@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\UseUuid;
 
 class Surat extends Model
 {
+    use UseUuid;
+
     protected $guarded = ['id'];
 
     public function jenis()

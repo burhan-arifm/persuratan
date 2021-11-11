@@ -14,11 +14,11 @@ class CreateProgramStudisTable extends Migration
     public function up()
     {
         Schema::create('program_studis', function (Blueprint $table) {
-            $table->string('kode_prodi', 3);
-            $table->string('program_studi');
+            $table->uuid('id')->primary();
+            $table->string('kode_program_studi', 3);
+            $table->string('nama_program_studi');
+            $table->string('singkatan_program_studi');
             $table->timestamps();
-
-            $table->primary('kode_prodi');
         });
     }
 

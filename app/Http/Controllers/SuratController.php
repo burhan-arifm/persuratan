@@ -134,7 +134,7 @@ class SuratController extends Controller
         ]);
         event(new \App\Events\SuratDiajukan($surat));
 
-        return view('surat.form.tersimpan');
+        return view("surat.saved.$request->tipe_surat", ['surat' => $surat]);
     }
 
     public function semua()
@@ -326,47 +326,51 @@ class SuratController extends Controller
 
     public function hapus($id)
     {
-        $surat = Surat::find($id);
+        try {
+            $surat = Surat::find($id);
 
-        switch ($surat->jenis_surat) {
-            case 'izin-kunjungan':
-                \App\IzinKunjungan::destroy($surat->surat);
-                break;
-            case 'izin-observasi':
-                \App\IzinObservasi::destroy($surat->surat);
-                break;
-            case 'izin-praktik':
-                \App\IzinPraktik::destroy($surat->surat);
-                break;
-            case 'izin-riset':
-                \App\IzinRiset::destroy($surat->surat);
-                break;
-            case 'job-training':
-                \App\JobTraining::destroy($surat->surat);
-                break;
-            case 'permohonan-komprehensif':
-                \App\Komprehensif::destroy($surat->surat);
-                break;
-            case 'permohonan-munaqasah':
-                \App\Munaqasah::destroy($surat->surat);
-                break;
-            case 'pernyataan-masih-kuliah':
-                \App\MasihKuliah::destroy($surat->surat);
-                break;
-            case 'ppm':
-                \App\PPM::destroy($surat->surat);
-                break;
-            case 'surat-keterangan':
-                \App\Keterangan::destroy($surat->surat);
-                break;
+            switch ($surat->jenis_surat) {
+                case 'izin-kunjungan':
+                    \App\IzinKunjungan::destroy($surat->surat);
+                    break;
+                case 'izin-observasi':
+                    \App\IzinObservasi::destroy($surat->surat);
+                    break;
+                case 'izin-praktik':
+                    \App\IzinPraktik::destroy($surat->surat);
+                    break;
+                case 'izin-riset':
+                    \App\IzinRiset::destroy($surat->surat);
+                    break;
+                case 'job-training':
+                    \App\JobTraining::destroy($surat->surat);
+                    break;
+                case 'permohonan-komprehensif':
+                    \App\Komprehensif::destroy($surat->surat);
+                    break;
+                case 'permohonan-munaqasah':
+                    \App\Munaqasah::destroy($surat->surat);
+                    break;
+                case 'pernyataan-masih-kuliah':
+                    \App\MasihKuliah::destroy($surat->surat);
+                    break;
+                case 'ppm':
+                    \App\PPM::destroy($surat->surat);
+                    break;
+                case 'surat-keterangan':
+                    \App\Keterangan::destroy($surat->surat);
+                    break;
 
-            default:
+                default:
+            }
+
+            Surat::destroy($id);
+
+            event(new \App\Events\SuratDihapus($surat));
+
+            return response()->status(200);
+        } catch (\Throwable $th) {
+            return response()->status(500);
         }
-
-        event(new \App\Events\SuratDihapus($surat));
-
-        Surat::destroy($id);
-
-        return response()->status(200);
     }
 }
