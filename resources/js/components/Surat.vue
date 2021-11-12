@@ -65,10 +65,7 @@ export default {
                 .content,
             timer: "",
             filter: "",
-            first_loaded: false,
-            showContent1: false,
-            showContent2: false,
-            showContent3: false
+            first_loaded: false
         };
     },
     created() {
@@ -80,16 +77,10 @@ export default {
     },
     methods: {
         fetchSurat() {
-            fetch(this.route("data_surat." + this.type), {
-                method: "GET",
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-TOKEN": this.csrf_token
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    this.letters = data;
+            axios
+                .get(this.route("data_surat." + this.type))
+                .then(response => {
+                    this.letters = response.data;
                     if (
                         this.type == "terbaru" &&
                         this.letters.length > 0 &&
@@ -118,7 +109,7 @@ export default {
                 }
             });
             Echo.channel("persuratan").listen("SuratDisunting", payload => {
-                var surat = this.letters.find(
+                const surat = this.letters.find(
                     surat => surat.id === payload.surat.id
                 );
                 if (surat) {
@@ -135,7 +126,7 @@ export default {
                 }
             });
             Echo.channel("persuratan").listen("SuratDiproses", payload => {
-                var surat = this.letters.find(
+                const surat = this.letters.find(
                     surat => surat.id === payload.surat.id
                 );
                 if (surat) {
@@ -143,7 +134,8 @@ export default {
                 }
             });
             Echo.channel("persuratan").listen("SuratDihapus", payload => {
-                var surat = this.letters.find(
+                console.log(payload);
+                const surat = this.letters.find(
                     surat => surat.id === payload.surat.id
                 );
                 if (surat) {

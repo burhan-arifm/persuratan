@@ -15,4 +15,8 @@ try {
     window.modal = Swal.mixin({
         reverseButtons: true
     });
+
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 } catch (e) {}

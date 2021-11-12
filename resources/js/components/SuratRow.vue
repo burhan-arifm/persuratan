@@ -1,18 +1,20 @@
 <template>
     <fragment>
-        <td>{{ index + 1 }}</td>
-        <td>{{ surat.nomor_surat }}</td>
-        <td>{{ surat.identitas }} - {{ surat.pemohon }}</td>
-        <td>{{ surat.jenis_surat }}</td>
-        <td>{{ waktu_readable }}</td>
+        <td class="pointer" @click="detailSurat()">{{ index + 1 }}</td>
+        <td class="pointer" @click="detailSurat()">{{ surat.nomor_surat }}</td>
+        <td class="pointer" @click="detailSurat()">
+            {{ surat.identitas }} - {{ surat.pemohon }}
+        </td>
+        <td class="pointer" @click="detailSurat()">{{ surat.jenis_surat }}</td>
+        <td class="pointer" @click="detailSurat()">{{ waktu_readable }}</td>
         <td>
             <a
                 :id="`cetak-${surat.id}`"
                 title="Cetak Surat"
                 :href="route('surat.cetak', { id: surat.id })"
-                class="btn btn-sm btn-primary"
-                :data-toggle="tooltip"
-                :data-placement="top"
+                class="btn btn-sm btn-primary my-1"
+                data-toggle="tooltip"
+                data-placement="top"
             >
                 <em class="fas fa-print"></em>
             </a>
@@ -20,7 +22,7 @@
                 :id="`sunting-${surat.id}`"
                 title="Sunting Surat"
                 :href="route('surat.sunting', { id: surat.id })"
-                class="btn btn-sm btn-primary"
+                class="btn btn-sm btn-outline-primary my-1"
                 data-toggle="tooltip"
                 data-placement="top"
             >
@@ -30,8 +32,8 @@
                 :id="`hapus-${surat.id}`"
                 title="Hapus Surat"
                 href="#"
-                @click="hapusSurat(surat.id, csrf_token)"
-                class="btn btn-sm btn-danger"
+                @click="hapusSurat()"
+                class="btn btn-sm btn-outline-danger my-1"
                 data-toggle="tooltip"
                 data-placement="top"
             >
@@ -40,6 +42,12 @@
         </td>
     </fragment>
 </template>
+
+<style lang="scss" scoped>
+.pointer {
+    cursor: pointer;
+}
+</style>
 
 <script>
 import dayjs from "dayjs";
@@ -63,44 +71,152 @@ export default {
         type: String
     },
     methods: {
-        hapusSurat(id_surat, token) {
+        detailSurat() {
+            Swal.fire({
+                title: `Detail Surat ${this.surat.jenis_surat}`,
+                text: "Memuat surat...",
+                showCloseButton: true,
+                showLoaderOnConfirm: true,
+                didOpen: () => {
+                    Swal.clickConfirm();
+                },
+                preConfirm: () => {
+                    return axios
+                        .get(route("surat.detail", { id: this.surat.id }), {
+                            headers: {
+                                "X-CSRF-TOKEN": this.csrf_token
+                            }
+                        })
+                        .then(response => {
+                            if (response.status !== 200) {
+                                throw new Error(response.statusText);
+                            }
+
+                            return response.data;
+                        })
+                        .catch(error => {
+                            throw new Error(error);
+                        });
+                }
+            })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: `Detail Surat ${this.surat.jenis_surat}`,
+                            width: "80%",
+                            html: result.value.replace(
+                                /[\s\S]+(<style>)/,
+                                `$1`
+                            ),
+                            showCloseButton: true,
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            focusConfirm: false,
+                            buttonsStyling: false,
+                            customClass: {
+                                confirmButton: "btn btn-primary m-1",
+                                denyButton: "btn btn-outline-primary m-1",
+                                cancelButton: "btn btn-outline-danger m-1"
+                            },
+                            confirmButtonText: `<em class="fas fa-print"></em> Cetak Surat`,
+                            confirmButtonAriaLabel: "Cetak Surat",
+                            denyButtonText: `<em class="fas fa-edit"></em> Sunting Surat`,
+                            denyButtonAriaLabel: "Sunting Surat",
+                            cancelButtonText: `<em class="fas fa-trash"></em> Hapus Surat`,
+                            cancelButtonAriaLabel: "Hapus Surat"
+                        }).then(result => {
+                            if (result.isConfirmed) {
+                                window.location.href = route("surat.cetak", {
+                                    id: this.surat.id
+                                });
+                            } else if (result.isDenied) {
+                                window.location.href = route("surat.sunting", {
+                                    id: this.surat.id
+                                });
+                            } else if (
+                                result.isDismissed &&
+                                result.dismiss === Swal.DismissReason.cancel
+                            ) {
+                                this.hapusSurat();
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Terjadi Kesalahan",
+                        text: error.message,
+                        buttonsStyling: false,
+                        customClass: {
+                            confirmButton: "btn btn-primary m-1"
+                        },
+                        icon: "error"
+                    });
+                });
+        },
+        hapusSurat() {
             Swal.fire({
                 title: "Apakah Anda yakin?",
                 text:
                     "Surat yang telah dihapus tidak dapat dikembalikan kembali.",
-                type: "warning",
+                icon: "warning",
                 showCancelButton: true,
                 showCloseButton: true,
+                reverseButtons: true,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: "btn btn-outline-danger m-1",
+                    cancelButton: "btn btn-secondary m-1"
+                },
                 confirmButtonText: "Ya, hapus surat tersebut",
-                cancelButtonText: "Urungkan"
-            }).then(result => {
-                if (result.value) {
-                    fetch(this.route("surat.hapus", { id: id_surat }), {
-                        method: "DELETE",
-                        headers: {
-                            "X-Requested-With": "XMLHttpRequest",
-                            "X-CSRF-TOKEN": token
-                        }
-                    })
-                        .then(response => {
-                            if (response.status === 200) {
-                                Swal.fire({
-                                    title: "Terhapus",
-                                    text:
-                                        "Surat yang Anda pilih berhasil dihapus.",
-                                    type: "success"
-                                });
+                cancelButtonText: "Urungkan",
+                showLoaderOnConfirm: true,
+                focusConfirm: false,
+                preConfirm: () => {
+                    return axios
+                        .delete(route("surat.hapus", { id: this.surat.id }), {
+                            headers: {
+                                "X-CSRF-TOKEN": this.csrf_token
                             }
                         })
+                        .then(response => {
+                            if (response.status !== 200) {
+                                throw new Error(response.statusText);
+                            }
+
+                            return response.data;
+                        })
                         .catch(error => {
-                            Swal.fire({
-                                title: "Gagal",
-                                text: `Surat yang Anda pilih gagal dihapus. Alasan: ${error}`,
-                                type: "error"
-                            });
+                            throw new Error(error);
                         });
                 }
-            });
+            })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Terhapus",
+                            text: "Surat yang Anda pilih berhasil dihapus.",
+                            icon: "success",
+                            showCloseButton: true,
+                            confirmButtonText: "Tutup"
+                        }).then(result => {
+                            if (result.value) {
+                                Swal.close();
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Terjadi Kesalahan",
+                        text: error.message,
+                        buttonsStyling: false,
+                        customClass: {
+                            confirmButton: "btn btn-primary m-1"
+                        },
+                        icon: "error"
+                    });
+                });
         }
     },
     computed: {
