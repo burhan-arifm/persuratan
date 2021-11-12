@@ -14,4 +14,9 @@ class IzinKunjungan extends Model
     {
         return $this->hasOne('App\Surat', 'surat');
     }
+
+    public function jurusan()
+    {
+        return $this->belongsTo('App\ProgramStudi', 'program_studi');
+    }
 }
