@@ -177,8 +177,6 @@ class SuratController extends Controller
             $surat->mahasiswa->semester = $semester;
         } else {
             $program_studi = \App\ProgramStudi::where('kode_prodi', $surat->izin_kunjungan->program_studi)->first();
-            error_log($surat->izin_kunjungan->program_studi);
-            error_log($program_studi);
             $surat->program_studi = $surat->izin_kunjungan->jurusan->program_studi;
             $waktu_kunjungan = new \Carbon\Carbon($surat->izin_kunjungan->tanggal_kunjungan.' '.$surat->izin_kunjungan->waktu_kunjungan, config('app.timezone'));
             $surat->tanggal_kunjungan = $waktu_kunjungan->isoFormat('dddd, DD MMMM YYYY');

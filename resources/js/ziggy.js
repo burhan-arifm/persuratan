@@ -14,6 +14,7 @@ const Ziggy = {
             uri: "api/data-surat/terbaru",
             methods: ["GET", "HEAD"]
         },
+        login: { uri: "login", methods: ["GET", "HEAD"] },
         logout: { uri: "logout", methods: ["POST"] },
         "surat.detail": { uri: "surat/{id}", methods: ["GET", "HEAD"] },
         "surat.cetak": { uri: "surat/{id}/cetak", methods: ["GET", "HEAD"] },

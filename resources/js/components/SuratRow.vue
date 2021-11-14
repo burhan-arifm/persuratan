@@ -197,7 +197,10 @@ export default {
                             title: "Terhapus",
                             text: "Surat yang Anda pilih berhasil dihapus.",
                             icon: "success",
-                            showCloseButton: true,
+                            buttonsStyling: false,
+                            customClass: {
+                                confirmButton: "btn btn-primary m-1"
+                            },
                             confirmButtonText: "Tutup"
                         }).then(result => {
                             if (result.value) {
@@ -210,11 +213,11 @@ export default {
                     Swal.fire({
                         title: "Terjadi Kesalahan",
                         text: error.message,
+                        icon: "error",
                         buttonsStyling: false,
                         customClass: {
                             confirmButton: "btn btn-primary m-1"
-                        },
-                        icon: "error"
+                        }
                     });
                 });
         }
