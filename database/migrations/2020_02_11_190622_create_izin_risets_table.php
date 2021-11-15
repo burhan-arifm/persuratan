@@ -14,7 +14,7 @@ class CreateIzinRisetsTable extends Migration
     public function up()
     {
         Schema::create('izin_risets', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->string('lokasi_riset');
             $table->text('alamat_lokasi');
             $table->string('kota_lokasi');

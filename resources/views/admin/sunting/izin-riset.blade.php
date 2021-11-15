@@ -8,7 +8,7 @@
 	<div class="form-group">
 		<label class="col-md-6" for="lokasi_riset">Nama Instansi/Tempat Penelitian</label>
 		<div class="col-auto">
-		<input class="form-control" id="lokasi_riset" name="lokasi_riset" placeholder="Contoh: PT Jaya Abadi" data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top" value="{{ $surat->izin_riset->lokasi_riset }}">
+		<input required class="form-control" id="lokasi_riset" name="lokasi_riset" placeholder="Contoh: PT Jaya Abadi" data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top" value="{{ $surat->izin_riset->lokasi_riset }}">
 		</div>
 	</div>
 
@@ -22,28 +22,28 @@
 	<div class="form-group">
 		<label class="col-md-6" for="kota_lokasi">Kota/Kabupaten</label>
 		<div class="col-auto">
-		<input id="kota_lokasi" name="kota_lokasi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top" value="{{ $surat->izin_riset->kota_lokasi }}">
+		<input required id="kota_lokasi" name="kota_lokasi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top" value="{{ $surat->izin_riset->kota_lokasi }}">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-md-6" for="judul_skripsi">Judul/Topik/Masalah</label>
 		<div class="col-auto">
-		<input class="form-control" id="judul_skripsi" name="judul_skripsi" placeholder="Contoh: Pengaruh A Terhadap B" data-toggle="tooltip" title="Masukkan judul/topik/permasalahan yang dibahas" data-placement="top" value="{{ $surat->izin_riset->judul_skripsi }}">
+		<input required class="form-control" id="judul_skripsi" name="judul_skripsi" placeholder="Contoh: Pengaruh A Terhadap B" data-toggle="tooltip" title="Masukkan judul/topik/permasalahan yang dibahas" data-placement="top" value="{{ $surat->izin_riset->judul_skripsi }}">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-md-6" for="pembimbing_1">Dosen Pembimbing 1</label>
 		<div class="col-auto">
-		<input id="pembimbing_1" name="pembimbing_1" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pembimbing beserta gelar akademisnya." data-placement="top" value="{{ $surat->izin_riset->pembimbing_1 }}">
+		<input required id="pembimbing_1" name="pembimbing_1" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pembimbing beserta gelar akademisnya." data-placement="top" value="{{ $surat->izin_riset->pembimbing_1 }}">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-md-6" for="pembimbing_2">Dosen Pembimbing 2</label>
 		<div class="col-auto">
-		<input id="pembimbing_2" name="pembimbing_2" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pembimbing beserta gelar akademisnya." data-placement="top" value="{{ $surat->izin_riset->pembimbing_2 }}">
+		<input required id="pembimbing_2" name="pembimbing_2" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pembimbing beserta gelar akademisnya." data-placement="top" value="{{ $surat->izin_riset->pembimbing_2 }}">
 		</div>
 	</div>
 @endsection

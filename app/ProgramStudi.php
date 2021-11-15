@@ -3,16 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\UseUuid;
 
 class ProgramStudi extends Model
 {
-    protected $primaryKey = 'kode_prodi';
-    protected $guarded = [];
+    use UseUuid;
 
-    public $incrementing = false;
+    protected $guarded = ['id'];
 
     public function mahasiswa()
     {
-        return $this->hasMany('App\Mahasiswa', 'program_studi', 'kode_prodi');
+        return $this->hasMany('App\Mahasiswa', 'program_studi');
+    }
+
+    public function izin_kunjungan()
+    {
+        return $this->hasMany('App\IzinKunjungan', 'program_studi');
     }
 }

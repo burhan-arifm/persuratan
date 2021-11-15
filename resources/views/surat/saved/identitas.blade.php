@@ -22,7 +22,7 @@
 	<div class="row">
 		<div class="col-md-4"><strong>Program Studi</strong></div>
 		<div class="col-auto">
-			{{ $surat->mahasiswa->jurusan->program_studi }}
+			{{ $surat->mahasiswa->jurusan->nama_program_studi }}
 		</div>
 	</div>
 

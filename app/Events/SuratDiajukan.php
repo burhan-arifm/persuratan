@@ -39,7 +39,7 @@ class SuratDiajukan implements ShouldBroadcast
     public function broadcastWith()
     {
         $this->surat->jenis;
-        if ($this->surat->jenis_surat != 'izin-kunjungan') {
+        if ($this->surat->jenis->kode_surat != 'izin-kunjungan') {
             $this->surat->mahasiswa;
         } else {
             $this->surat->izin_kunjungan;

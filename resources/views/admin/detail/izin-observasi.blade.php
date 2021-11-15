@@ -43,7 +43,7 @@
                         <tr>
                             <td>Program Studi</td>
                             <td>:</td>
-                            <td>{{ $surat->mahasiswa->jurusan->program_studi }}</td>
+                            <td>{{ $surat->mahasiswa->jurusan->nama_program_studi }}</td>
                         </tr>
                         <tr>
                             <td>Program/Semester</td>

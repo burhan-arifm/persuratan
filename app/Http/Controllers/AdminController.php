@@ -25,7 +25,7 @@ class AdminController extends Controller
         $surat->nomor_surat = $nomor_surat;
         $surat->tanggal_terbit = $time;
 
-        return view("admin.sunting.$surat->jenis_surat", [
+        return view("admin.sunting.{$surat->jenis->kode_surat}", [
             'surat' => $surat,
             'program_studi' => \App\ProgramStudi::all(),
             ]);

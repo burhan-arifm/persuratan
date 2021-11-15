@@ -38,7 +38,7 @@
                         <tr>
                             <td>Program Studi</td>
                             <td>:</td>
-                            <td>{{ $surat->program_studi }}</td>
+                            <td>{{ $surat->izin_kunjungan->jurusan->nama_program_studi }}</td>
                         </tr>
                         <tr>
                             <td>Semester/Kelas</td>

@@ -1,6 +1,8 @@
 <template>
     <fragment>
-        <td class="pointer" @click="detailSurat()">{{ index + 1 }}</td>
+        <td class="pointer text-right" @click="detailSurat()">
+            {{ index + 1 }}
+        </td>
         <td class="pointer" @click="detailSurat()">{{ surat.nomor_surat }}</td>
         <td class="pointer" @click="detailSurat()">
             {{ surat.identitas }} - {{ surat.pemohon }}

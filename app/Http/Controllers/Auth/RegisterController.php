@@ -52,6 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'nip' => ['required', 'string', 'max:20', 'unique:admins'],
+            'username' => ['required', 'string', 'max:20', 'unique:admins'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -65,9 +66,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $nip = str_replace(array('.', ' '), '', $data['nip']);
+
         return Admin::create([
             'name' => $data['name'],
-            'nip' => $data['nip'],
+            'username' => $data['username'],
+            'nip' => $nip,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

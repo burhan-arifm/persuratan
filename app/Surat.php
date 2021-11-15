@@ -3,14 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\UseUuid;
 
 class Surat extends Model
 {
+    use UseUuid;
+
     protected $guarded = ['id'];
 
     public function jenis()
     {
-        return $this->belongsTo('App\JenisSurat', 'jenis_surat', 'kode_surat');
+        return $this->belongsTo('App\JenisSurat', 'jenis_surat');
     }
 
     public function mahasiswa()

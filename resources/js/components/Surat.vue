@@ -12,9 +12,7 @@
                 />
             </div>
         </div>
-        <table
-            class="table table-bordered table-striped table-hover table-responsive table-sm"
-        >
+        <table class="table table-bordered table-striped table-hover table-sm">
             <thead>
                 <tr>
                     <th>No.</th>

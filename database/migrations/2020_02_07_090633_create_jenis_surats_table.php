@@ -14,7 +14,7 @@ class CreateJenisSuratsTable extends Migration
     public function up()
     {
         Schema::create('jenis_surats', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->string('kode_surat')->unique();
             $table->string('jenis_surat');
             $table->string('perihal');

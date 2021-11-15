@@ -14,11 +14,11 @@ class CreateSuratsTable extends Migration
     public function up()
     {
         Schema::create('surats', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->integer('nomor_surat');
             $table->string('jenis_surat');
             $table->string('pemohon');
-            $table->bigInteger('surat');
+            $table->string('surat');
             $table->enum('status_surat', ["Belum Diproses", "Telah Diproses"])->default("Belum Diproses");
             $table->date('tanggal_terbit');
             $table->timestamps();

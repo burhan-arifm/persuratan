@@ -8,7 +8,7 @@
 	<div class="form-group">
 		<label class="col-md-6" for="instansi_penerima">Nama Instansi/Lembaga</label>
 		<div class="col-auto">
-		<input class="form-control" id="instansi_penerima" name="instansi_penerima" placeholder="PT. Jaya Abadi"  data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top" value="{{ $surat->job_training->instansi_penerima }}">
+		<input required class="form-control" id="instansi_penerima" name="instansi_penerima" placeholder="PT. Jaya Abadi"  data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top" value="{{ $surat->job_training->instansi_penerima }}">
 		</div>
 	</div>
 
@@ -22,14 +22,14 @@
 	<div class="form-group">
 		<label class="col-md-6" for="kota_lokasi">Kota/Kabupaten</label>
 		<div class="col-auto">
-		<input id="kota_lokasi" name="kota_lokasi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top" value="{{ $surat->job_training->kota_lokasi }}">
+		<input required id="kota_lokasi" name="kota_lokasi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top" value="{{ $surat->job_training->kota_lokasi }}">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-md-6" for="dosen_pembimbing">Dosen Pembimbing</label>
 		<div class="col-auto">
-		<input class="form-control" id="dosen_pembimbing" name="dosen_pembimbing" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pembimbing beserta gelar akademisnya." data-placement="top" value="{{ $surat->job_training->dosen_pembimbing }}">
+		<input required class="form-control" id="dosen_pembimbing" name="dosen_pembimbing" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pembimbing beserta gelar akademisnya." data-placement="top" value="{{ $surat->job_training->dosen_pembimbing }}">
 		</div>
 	</div>
 @endsection
