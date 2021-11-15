@@ -8,7 +8,7 @@
     <div class="form-group">
         <label class="col-md-6" for="instansi_penerima">Tujuan Observasi</label>
         <div class="col-auto">
-            <input id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Contoh: PT. Jaya Abadi" class="form-control" data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top" value="{{ $surat->izin_praktik->instansi_penerima }}">
+            <input required id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Contoh: PT. Jaya Abadi" class="form-control" data-toggle="tooltip" title="Masukkan nama instansi tempat pelaksanaan" data-placement="top" value="{{ $surat->izin_praktik->instansi_penerima }}">
         </div>
     </div>
 
@@ -22,21 +22,21 @@
     <div class="form-group">
         <label class="col-md-6" for="kota_lokasi">Kota/Kabupaten</label>
         <div class="col-auto">
-            <input id="kota_lokasi" name="kota_lokasi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top" value="{{ $surat->izin_praktik->kota_lokasi }}">
+            <input required id="kota_lokasi" name="kota_lokasi" type="text" placeholder="Contoh: Bandung, Kabupaten Bandung" class="form-control" data-toggle="tooltip" title="Masukkan kota instansi tempat pelaksanaan berada" data-placement="top" value="{{ $surat->izin_praktik->kota_lokasi }}">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-6" for="mata_kuliah">Mata Kuliah</label>
         <div class="col-auto">
-            <input id="mata_kuliah" name="mata_kuliah" type="text" placeholder="Contoh: Etika Jurnalisme" class="form-control" data-toggle="tooltip" title="Masukkan nama mata kuliah" data-placement="top" value="{{ $surat->izin_praktik->mata_kuliah }}">
+            <input required id="mata_kuliah" name="mata_kuliah" type="text" placeholder="Contoh: Etika Jurnalisme" class="form-control" data-toggle="tooltip" title="Masukkan nama mata kuliah" data-placement="top" value="{{ $surat->izin_praktik->mata_kuliah }}">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-6" for="dosen_pengampu">Dosen Pengampu</label>
         <div class="col-auto">
-            <input id="dosen_pengampu" name="dosen_pengampu" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pengampu beserta gelar akademisnya." data-placement="top" value="{{ $surat->izin_praktik->dosen_pengampu }}">
+            <input required id="dosen_pengampu" name="dosen_pengampu" type="text" class="form-control" placeholder="Contoh: Dr. Mikial Ramdan., M.Si." data-toggle="tooltip" title="Masukkan nama dosen pengampu beserta gelar akademisnya." data-placement="top" value="{{ $surat->izin_praktik->dosen_pengampu }}">
         </div>
     </div>
 @endsection

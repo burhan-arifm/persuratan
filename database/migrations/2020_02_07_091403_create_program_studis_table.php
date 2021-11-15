@@ -15,7 +15,7 @@ class CreateProgramStudisTable extends Migration
     {
         Schema::create('program_studis', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('kode_program_studi', 3);
+            $table->string('kode_program_studi', 3)->unique();
             $table->string('nama_program_studi');
             $table->string('singkatan_program_studi');
             $table->timestamps();

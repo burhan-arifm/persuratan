@@ -13,7 +13,7 @@ class Surat extends Model
 
     public function jenis()
     {
-        return $this->belongsTo('App\JenisSurat', 'jenis_surat', 'kode_surat');
+        return $this->belongsTo('App\JenisSurat', 'jenis_surat');
     }
 
     public function mahasiswa()

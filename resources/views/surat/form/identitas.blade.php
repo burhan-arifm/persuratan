@@ -4,14 +4,14 @@
 	<div class="form-group">
 		<label class="col-md-6" for="nama_mahasiswa">Nama</label>
 		<div class="col-auto">
-			<input id="nama" name="nama_mahasiswa" type="text" placeholder="Contoh: Asep Hidayat Ramdani" class="form-control" data-toggle="tooltip" title="Isi dengan nama lengkap Anda." data-placement="top">
+			<input required id="nama" name="nama_mahasiswa" type="text" placeholder="Contoh: Asep Hidayat Ramdani" class="form-control" data-toggle="tooltip" title="Isi dengan nama lengkap Anda." data-placement="top">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-md-6" for="nim">NIM</label>
 		<div class="col-auto">
-			<input id="nim" name="nim" type="text" placeholder="Contoh: 1234050123" class="form-control" data-toggle="tooltip" title="Isi dengan Nomor Induk Mahasiswa Anda." data-placement="top">
+			<input required id="nim" name="nim" type="text" placeholder="Contoh: 1234050123" class="form-control" data-toggle="tooltip" title="Isi dengan Nomor Induk Mahasiswa Anda." data-placement="top">
 		</div>
 	</div>
 	<div class="form-group">
@@ -20,7 +20,7 @@
 			<select id="program_studi" name="program_studi" class="form-control selector" form="pengajuan-surat" data-width="100%">
 				<option disabled selected hidden>Pilih Program Studi Anda</option>
 				@foreach($program_studi as $prodi)
-					<option value="{{ $prodi->kode_prodi }}">{{ $prodi->program_studi }}</option>
+					<option value="{{ $prodi->kode_program_studi }}">{{ $prodi->nama_program_studi }}</option>
 				@endforeach
 			</select>
 		</div>

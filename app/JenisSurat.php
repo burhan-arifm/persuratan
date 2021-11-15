@@ -15,6 +15,6 @@ class JenisSurat extends Model
 
     public function surat()
     {
-        return $this->hasMany('App\Surat', 'jenis_surat', 'kode_surat');
+        return $this->hasMany('App\Surat', 'jenis_surat');
     }
 }

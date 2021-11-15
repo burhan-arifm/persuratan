@@ -31,7 +31,7 @@
                                 @csrf
                                 <fieldset>
                                     <div class="form-group">
-                                        <input id="identity" class="form-control" placeholder="NIP" name="identity" type="text" autofocus required autocomplete>
+                                        <input required id="identity" class="form-control" placeholder="NIP" name="identity" type="text" autofocus required autocomplete>
                                         @if($errors->get('email') || $errors->get('nip'))
                                             <span class="invalid-feedback" role="alert">
                                             @foreach ($errors->all() as $error)
@@ -41,7 +41,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control @error('password') is-invalid @enderror" placeholder="Password" type="password" name="password" required autocomplete>
+                                        <input required class="form-control @error('password') is-invalid @enderror" placeholder="Password" type="password" name="password" required autocomplete>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

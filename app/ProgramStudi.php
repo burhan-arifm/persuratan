@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\UseUuid;
 
 class ProgramStudi extends Model
 {
-    protected $primaryKey = 'kode_prodi';
-    protected $guarded = [];
+    use UseUuid;
 
-    public $incrementing = false;
+    protected $guarded = ['id'];
 
     public function mahasiswa()
     {

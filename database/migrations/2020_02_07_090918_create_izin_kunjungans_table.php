@@ -19,7 +19,7 @@ class CreateIzinKunjungansTable extends Migration
             $table->text('alamat_instansi');
             $table->string('kota_instansi');
             $table->string('mata_kuliah');
-            $table->char('program_studi', 3);
+            $table->string('program_studi');
             $table->string('semester', 4);
             $table->char('kelas', 1);
             $table->string('dosen_pengampu');

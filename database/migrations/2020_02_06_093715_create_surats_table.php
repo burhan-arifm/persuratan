@@ -18,7 +18,7 @@ class CreateSuratsTable extends Migration
             $table->integer('nomor_surat');
             $table->string('jenis_surat');
             $table->string('pemohon');
-            $table->bigInteger('surat');
+            $table->string('surat');
             $table->enum('status_surat', ["Belum Diproses", "Telah Diproses"])->default("Belum Diproses");
             $table->date('tanggal_terbit');
             $table->timestamps();

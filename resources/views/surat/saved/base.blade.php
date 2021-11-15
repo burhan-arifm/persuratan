@@ -16,11 +16,12 @@
                 <div class="card-body">
                     <h3 class="card-title mb-3">Formulir Pengajuan Surat @yield('form-name')</h3>
                     <p class="card-text">
-                        Pengajuan Anda telah tersimpan. Berikut adalah data yang Anda masukkan. Anda dapat mengambil surat tersebut di Tata Usaha Fakultas Dakwah dan Komunikasi Universitas Islam Negeri Sunan Gunung Djati Bandung. Apabila terdapat kesalahan data, mohon untuk segera menghubungi Tata Usaha Fakultas Dakwah dan Komunikasi Universitas Islam Negeri Sunan Gunung Djati Bandung</p>
+                        Pengajuan Anda telah tersimpan. Berikut adalah data yang Anda masukkan. Anda dapat mengambil surat tersebut di Tata Usaha Fakultas Dakwah dan Komunikasi Universitas Islam Negeri Sunan Gunung Djati Bandung. Apabila terdapat kesalahan data, mohon untuk segera menghubungi Tata Usaha Fakultas Dakwah dan Komunikasi Universitas Islam Negeri Sunan Gunung Djati Bandung
+                    </p>
                     @yield('card-body')
-                    <div class="mt-3">
-                        <a href="{{ route('pengajuan.index') }}">Buat pengajuan surat yang lain</a>
-                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ route('pengajuan.index') }}" class="font-weight-bold">Buat pengajuan surat yang lain</a>
                 </div>
             </div>
         </div>

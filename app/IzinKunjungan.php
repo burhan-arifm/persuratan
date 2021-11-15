@@ -20,6 +20,6 @@ class IzinKunjungan extends Model
 
     public function jurusan()
     {
-        return $this->belongsTo('App\ProgramStudi', 'program_studi', 'kode_prodi');
+        return $this->belongsTo('App\ProgramStudi', 'program_studi');
     }
 }

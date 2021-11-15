@@ -41,7 +41,7 @@
 	<div class="row">
 		<div class="col-md-4"><strong>Program Studi</strong></div>
 		<div class="col-auto">
-            {{ $surat->izin_kunjungan->jurusan->program_studi }}
+            {{ $surat->izin_kunjungan->jurusan->nama_program_studi }}
 		</div>
 	</div>
 

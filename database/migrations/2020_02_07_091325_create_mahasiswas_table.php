@@ -17,7 +17,7 @@ class CreateMahasiswasTable extends Migration
             $table->integer('nim')->primary();
             $table->string('nama');
             $table->string('tempat_tanggal_lahir')->nullable($value = true);
-            $table->char('program_studi', 3);
+            $table->string('program_studi');
             $table->text('alamat');
             $table->string('pembimbing_studi')->nullable($value = true);
             $table->timestamps();

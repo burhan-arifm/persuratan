@@ -43,7 +43,12 @@ class LoginController extends Controller
     {
         $login = request()->input('identity');
 
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'nip';
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : filter_var($login, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/[0-9]{18}|[0-9]{8}.[0-9]{6}.[1|2]{1}.[0-9]{3}|[0-9]{8} [0-9]{6} [1|2]{1} [0-9]{3}/gim'))) ? 'nip' : 'username';
+
+        if ($field == 'nip') {
+            $login = str_replace(array('.', ' '), '', $login);
+        }
+
         request()->merge([$field => $login]);
 
         return $field;
@@ -55,6 +60,7 @@ class LoginController extends Controller
             'identity'  => 'required|string',
             'password'  => 'required|string',
             'email'     => 'string|exists:admins',
+            'username'  => 'string|exists:admins',
             'nip'       => 'string|exists:admins'
         ]);
     }
