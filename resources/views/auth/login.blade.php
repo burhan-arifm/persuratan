@@ -35,10 +35,10 @@
                                     <div class="form-group">
                                         <label for="identity">NIP / username / e-mail</label>
                                         <input required id="identity" class="form-control" placeholder="NIP" name="identity" type="text" autofocus required autocomplete>
-                                        @if($errors->get('email') || $errors->get('nip'))
+                                        @if($errors->get('email') || $errors->get('nip')|| $errors->get('username'))
                                             <span class="invalid-feedback" role="alert">
                                             @foreach ($errors->all() as $error)
-                                                <strong>{{ $error }}</strong>
+                                                <strong>{{ $error->message }}</strong>
                                             @endforeach
                                             </span>
                                         @endif

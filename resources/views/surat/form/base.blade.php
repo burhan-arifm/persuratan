@@ -6,7 +6,6 @@
 
 @section('css')
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.8/dist/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.5.2/dist/select2-bootstrap4.min.css">
     @yield('additional-css-2')
 @endsection
 
@@ -15,7 +14,7 @@
 @endsection
 
 @section('card-body')
-    <form action="{{route('ajukan_surat')}}" method="post" id="pengajuan-surat" class="form-horizontal">
+    <form action="{{route('ajukan_surat')}}" method="post" id="pengajuan-surat" class="needs-validation" novalidate>
         <fieldset>
             @csrf
             @yield('form')
@@ -38,5 +37,25 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.8/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/form.js') }}"></script>
+    <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+        });
+    }, false);
+    })();
+    </script>
 	@yield('additional-scripts-2')
 @endsection

@@ -22,16 +22,16 @@
                             @method('PUT')
                 
                             <div class="form-group">
-                                <label class="col-md-6" for="nomor_surat">Nomor Surat</label>
+                                <label for="nomor_surat">Nomor Surat</label>
+                                <input required id="nomor_surat" name="nomor_surat" type="text" class="form-control" value="{{ $surat->nomor_surat }}">
                                 <div class="col-auto">
-                                    <input required id="nomor_surat" name="nomor_surat" type="text" class="form-control" value="{{ $surat->nomor_surat }}">
                                 </div>
                             </div>
                 
                             <div class="form-group">
-                                <label class="col-md-6" for="tanggal_terbit">Tanggal Terbit</label>
+                                <label for="tanggal_terbit">Tanggal Terbit</label>
+                                <input required id="tanggal_terbit" type="text" class="form-control datetimepicker-input" name="tanggal_terbit" data-toggle="datetimepicker" data-target="#tanggal_terbit">
                                 <div class="col-auto">
-                                    <input required id="tanggal_terbit" type="text" class="form-control datetimepicker-input" name="tanggal_terbit" data-toggle="datetimepicker" data-target="#tanggal_terbit">
                                 </div>
                             </div>
                             @yield('form')

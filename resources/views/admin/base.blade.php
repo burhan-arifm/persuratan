@@ -31,7 +31,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item{{ Request::routeIs('beranda') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('beranda') }}">
-                    <i class="fas fa-fw fa-home"></i>
+                <i class="ph-house-fill align-middle"></i>
                     <span>Beranda</span></a>
             </li>
 
@@ -42,7 +42,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="ph-wrench-fill align-middle"></i>
                     <span>Utilities</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -63,7 +63,7 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item{{ Request::routeIs('surat.riwayat') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('surat.riwayat') }}">
-                    <i class="fas fa-fw fa-table"></i>
+                <i class="ph-table-fill align-middle"></i>
                     <span>Persuratan</span></a>
             </li>
 
@@ -88,7 +88,7 @@
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                    <i class="ph-list-fill align-middle"></i>
                     </button>
 
                     <!-- Topbar Navbar -->
@@ -105,14 +105,13 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    <i class="ph-gear-six-fill align-middle mr-2 text-gray-400"></i>
+                                    Pengaturan Akun
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> -->
                                 <a class="dropdown-item" href="#" id="logout">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    <i class="ph-sign-out-fill align-middle mr-2 text-gray-400"></i>
+                                    Keluar
                                 </a>
                             </div>
                         </li>
@@ -152,7 +151,7 @@
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
+        <i class="ph-caret-up-fill"></i>
     </a>
 @endsection
 

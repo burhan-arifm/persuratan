@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('additional-css')
-    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
     @yield('css')
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 @endsection
 
 @section('body')
