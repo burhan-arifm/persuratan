@@ -9,10 +9,12 @@
 @section('body')
     <main class="h-100">
         <div class="container d-flex flex-column justify-content-center h-100">
-            <div class="row mb-3 justify-content-center">
-                <h5 class="text-center font-weight-bold">SISTEM INFORMASI MANAJEMEN DATA AKADEMIK</h5>
-                <h5 class="text-center font-weight-bold">FAKULTAS ILMU DAKWAH DAN ILMU KOMUNIKASI</h5>
-                <h5 class="text-center font-weight-bold">UNIVERSITAS ISLAM NEGERI SUNAN GUNUNG DJATI BANDUNG</h5>
+            <div class="row mb-3">
+                <div class="col align-items-center">
+                    <h4 class="text-center font-weight-bold">SISTEM INFORMASI MANAJEMEN DATA AKADEMIK</h4>
+                    <h4 class="text-center font-weight-bold">FAKULTAS ILMU DAKWAH DAN ILMU KOMUNIKASI</h4>
+                    <h4 class="text-center font-weight-bold">UNIVERSITAS ISLAM NEGERI SUNAN GUNUNG DJATI BANDUNG</h4>
+                </div>
             </div>
             <div id="loginwrapper" class="row justify-content-center align-items-center">
                 <div class="col-md-2 mb-2 mr-4 align-items-center">
@@ -31,6 +33,7 @@
                                 @csrf
                                 <fieldset>
                                     <div class="form-group">
+                                        <label for="identity">NIP / username / e-mail</label>
                                         <input required id="identity" class="form-control" placeholder="NIP" name="identity" type="text" autofocus required autocomplete>
                                         @if($errors->get('email') || $errors->get('nip'))
                                             <span class="invalid-feedback" role="alert">
@@ -41,6 +44,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
+                                        <label for="password">Password</label>
                                         <input required class="form-control @error('password') is-invalid @enderror" placeholder="Password" type="password" name="password" required autocomplete>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
