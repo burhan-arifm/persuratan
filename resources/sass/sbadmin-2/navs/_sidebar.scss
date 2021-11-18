@@ -50,7 +50,7 @@
         .collapse,
         .collapsing {
             .collapse-inner {
-                padding: .5rem 0;
+                padding: 0.5rem 0;
                 min-width: 10rem;
                 font-size: $dropdown-font-size;
                 margin: 0 0 1rem 0;
@@ -58,7 +58,7 @@
                 .collapse-header {
                     margin: 0;
                     white-space: nowrap;
-                    padding: .5rem 1.5rem;
+                    padding: 0.5rem 1.5rem;
                     text-transform: uppercase;
                     font-weight: 800;
                     font-size: 0.65rem;
@@ -100,8 +100,8 @@
 
         &::after {
             font-weight: 900;
-            content: '\f104';
-            font-family: 'Font Awesome 5 Free';
+            content: "\f82c";
+            font-family: "Phosphor";
             margin-right: 0.1rem;
         }
 
@@ -119,8 +119,8 @@
         overflow: hidden;
 
         #sidebarToggle::after {
-            content: '\f105';
-            font-family: 'Font Awesome 5 Free';
+            content: "\f82d";
+            font-family: "Phosphor";
             margin-left: 0.25rem;
         }
 
@@ -192,7 +192,6 @@
         width: $sidebar-base-width !important;
 
         .nav-item {
-
             // Accordion
             .collapse {
                 position: relative;
@@ -243,12 +242,12 @@
                         vertical-align: 0;
                         border: 0;
                         font-weight: 900;
-                        content: '\f107';
-                        font-family: 'Font Awesome 5 Free';
+                        content: "\f82b";
+                        font-family: "Phosphor";
                     }
 
                     &.collapsed::after {
-                        content: '\f105';
+                        content: "\f82d";
                     }
                 }
             }
@@ -273,17 +272,20 @@
             width: $sidebar-collapsed-width !important;
 
             .nav-item {
-
                 // Accordion
                 .collapse {
                     position: absolute;
-                    left: calc(#{$sidebar-collapsed-width} + #{$grid-gutter-width} / 2);
+                    left: calc(
+                        #{$sidebar-collapsed-width} + #{$grid-gutter-width} / 2
+                    );
                     z-index: 1;
                     top: 2px;
                     // Grow In Animation for Toggled State
                     animation-name: growIn;
                     animation-duration: 200ms;
-                    animation-timing-function: transform cubic-bezier(.18, 1.25, .4, 1), opacity cubic-bezier(0, 1, .4, 1);
+                    animation-timing-function: transform
+                            cubic-bezier(0.18, 1.25, 0.4, 1),
+                        opacity cubic-bezier(0, 1, 0.4, 1);
 
                     .collapse-inner {
                         box-shadow: $box-shadow;

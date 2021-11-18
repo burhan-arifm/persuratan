@@ -2442,6 +2442,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2459,6 +2463,9 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(dayjs_plugin_relativeTime__W
     index: Number,
     csrf_token: String,
     type: String
+  },
+  mounted: function mounted() {
+    $("[data-toggle='tooltip']").tooltip();
   },
   methods: {
     detailSurat: function detailSurat() {
@@ -2505,11 +2512,11 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(dayjs_plugin_relativeTime__W
               denyButton: "btn btn-outline-primary m-1",
               cancelButton: "btn btn-outline-danger m-1"
             },
-            confirmButtonText: "<em class=\"fas fa-print\"></em> Cetak Surat",
+            confirmButtonText: "<i class=\"ph-printer-fill ph-lg align-middle\"></i> Cetak Surat",
             confirmButtonAriaLabel: "Cetak Surat",
-            denyButtonText: "<em class=\"fas fa-edit\"></em> Sunting Surat",
+            denyButtonText: "<i class=\"ph-note-pencil-fill ph-lg align-middle\"></i> Sunting Surat",
             denyButtonAriaLabel: "Sunting Surat",
-            cancelButtonText: "<em class=\"fas fa-trash\"></em> Hapus Surat",
+            cancelButtonText: "<i class=\"ph-trash-fill ph-lg align-middle\"></i> Hapus Surat",
             cancelButtonAriaLabel: "Hapus Surat"
           }).then(function (result) {
             if (result.isConfirmed) {
@@ -2609,7 +2616,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(dayjs_plugin_relativeTime__W
         return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.surat.waktu).fromNow();
       }
 
-      return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.surat.waktu).format("LLLL");
+      return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.surat.waktu).format("dddd, DD MMMM YYYY HH:mm");
     }
   }
 });
@@ -2628,7 +2635,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".pointer[data-v-5a0aaa42] {\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".pointer[data-v-5a0aaa42] {\n  cursor: pointer;\n}\n.table td[data-v-5a0aaa42]:last-child {\n  padding: 0.5rem;\n}", ""]);
 
 // exports
 
@@ -3796,10 +3803,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "table",
-          {
-            staticClass:
-              "table table-bordered table-striped table-hover table-sm"
-          },
+          { staticClass: "table table-bordered table-striped table-hover" },
           [
             _vm._m(0),
             _vm._v(" "),
@@ -3966,7 +3970,7 @@ var render = function() {
       _c(
         "a",
         {
-          staticClass: "btn btn-sm btn-primary my-1",
+          staticClass: "btn btn-sm btn-primary btn-icon",
           attrs: {
             id: "cetak-" + _vm.surat.id,
             title: "Cetak Surat",
@@ -3975,13 +3979,13 @@ var render = function() {
             "data-placement": "top"
           }
         },
-        [_c("em", { staticClass: "fas fa-print" })]
+        [_c("i", { staticClass: "ph-xl ph-printer-fill align-middle" })]
       ),
       _vm._v(" "),
       _c(
         "a",
         {
-          staticClass: "btn btn-sm btn-outline-primary my-1",
+          staticClass: "btn btn-sm btn-outline-primary btn-icon",
           attrs: {
             id: "sunting-" + _vm.surat.id,
             title: "Sunting Surat",
@@ -3990,13 +3994,13 @@ var render = function() {
             "data-placement": "top"
           }
         },
-        [_c("em", { staticClass: "fas fa-edit" })]
+        [_c("i", { staticClass: "ph-xl ph-note-pencil-fill align-middle" })]
       ),
       _vm._v(" "),
       _c(
         "a",
         {
-          staticClass: "btn btn-sm btn-outline-danger my-1",
+          staticClass: "btn btn-sm btn-outline-danger btn-icon",
           attrs: {
             id: "hapus-" + _vm.surat.id,
             title: "Hapus Surat",
@@ -4010,7 +4014,7 @@ var render = function() {
             }
           }
         },
-        [_c("em", { staticClass: "fas fa-trash" })]
+        [_c("i", { staticClass: "ph-xl ph-trash-fill align-middle" })]
       )
     ])
   ])

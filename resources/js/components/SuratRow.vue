@@ -14,32 +14,32 @@
                 :id="`cetak-${surat.id}`"
                 title="Cetak Surat"
                 :href="route('surat.cetak', { id: surat.id })"
-                class="btn btn-sm btn-primary my-1"
+                class="btn btn-sm btn-primary btn-icon"
                 data-toggle="tooltip"
                 data-placement="top"
             >
-                <em class="fas fa-print"></em>
+                <i class="ph-xl ph-printer-fill align-middle"></i>
             </a>
             <a
                 :id="`sunting-${surat.id}`"
                 title="Sunting Surat"
                 :href="route('surat.sunting', { id: surat.id })"
-                class="btn btn-sm btn-outline-primary my-1"
+                class="btn btn-sm btn-outline-primary btn-icon"
                 data-toggle="tooltip"
                 data-placement="top"
             >
-                <em class="fas fa-edit"></em>
+                <i class="ph-xl ph-note-pencil-fill align-middle"></i>
             </a>
             <a
                 :id="`hapus-${surat.id}`"
                 title="Hapus Surat"
                 href="#"
                 @click="hapusSurat()"
-                class="btn btn-sm btn-outline-danger my-1"
+                class="btn btn-sm btn-outline-danger btn-icon"
                 data-toggle="tooltip"
                 data-placement="top"
             >
-                <em class="fas fa-trash"></em>
+                <i class="ph-xl ph-trash-fill align-middle"></i>
             </a>
         </td>
     </fragment>
@@ -48,6 +48,10 @@
 <style lang="scss" scoped>
 .pointer {
     cursor: pointer;
+}
+
+.table td:last-child {
+    padding: 0.5rem;
 }
 </style>
 
@@ -71,6 +75,9 @@ export default {
         index: Number,
         csrf_token: String,
         type: String
+    },
+    mounted: function() {
+        $("[data-toggle='tooltip']").tooltip();
     },
     methods: {
         detailSurat() {
@@ -120,11 +127,11 @@ export default {
                                 denyButton: "btn btn-outline-primary m-1",
                                 cancelButton: "btn btn-outline-danger m-1"
                             },
-                            confirmButtonText: `<em class="fas fa-print"></em> Cetak Surat`,
+                            confirmButtonText: `<i class="ph-printer-fill ph-lg align-middle"></i> Cetak Surat`,
                             confirmButtonAriaLabel: "Cetak Surat",
-                            denyButtonText: `<em class="fas fa-edit"></em> Sunting Surat`,
+                            denyButtonText: `<i class="ph-note-pencil-fill ph-lg align-middle"></i> Sunting Surat`,
                             denyButtonAriaLabel: "Sunting Surat",
-                            cancelButtonText: `<em class="fas fa-trash"></em> Hapus Surat`,
+                            cancelButtonText: `<i class="ph-trash-fill ph-lg align-middle"></i> Hapus Surat`,
                             cancelButtonAriaLabel: "Hapus Surat"
                         }).then(result => {
                             if (result.isConfirmed) {
@@ -230,7 +237,7 @@ export default {
                 return dayjs(this.surat.waktu).fromNow();
             }
 
-            return dayjs(this.surat.waktu).format("LLLL");
+            return dayjs(this.surat.waktu).format("dddd, DD MMMM YYYY HH:mm");
         }
     }
 };
