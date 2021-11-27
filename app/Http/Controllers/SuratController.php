@@ -163,30 +163,9 @@ class SuratController extends Controller
     public function detail($id)
     {
         $surat = Surat::find($id);
-        $surat->perihal = html_entity_decode($surat->jenis->perihal);
-        $tanggal_terbit = \Carbon\Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);
-        $surat->nomor_surat = sprintf("B-%04u/Un.05/III.4/TL.10/%02u/%u", $surat->nomor_surat, $tanggal_terbit->month, $tanggal_terbit->year);
-        $surat->tanggal_terbit = $tanggal_terbit->isoFormat('DD MMMM Y');
+        $surat = setSurat($surat);
 
-        if ($surat->jenis->kode_surat == 'izin-kunjungan') {
-            $waktu_kunjungan = new \Carbon\Carbon("{$surat->izin_kunjungan->tanggal_kunjungan} {$surat->izin_kunjungan->waktu_kunjungan}", config('app.timezone'));
-            $surat->tanggal_kunjungan = $waktu_kunjungan->isoFormat('dddd, DD MMMM YYYY');
-            $surat->waktu_kunjungan = $waktu_kunjungan->isoFormat('HH:mm \\WIB');
-
-            return view("admin.detail.izin-kunjungan", ['surat' => $surat]);
-        }
-
-        $batch = substr($surat->mahasiswa->nim, 1, 2);
-        $enroll = \Carbon\Carbon::createFromFormat('j n y', "1 7 $batch", config('app.timezone'));
-        $time_now = \Carbon\Carbon::now();
-        error_log(ceil($enroll->diffInMonths($time_now) / 6));
-        $roman_semester = \NumConvert::roman(intval(ceil($enroll->diffInMonths($time_now) / 6)));
-        $formatter = new \NumberFormatter(config('app.locale'), \NumberFormatter::SPELLOUT);
-        $word_semester = $formatter->format(ceil($enroll->diffInMonths($time_now) / 6));
-        $semester = "$roman_semester ($word_semester)";
-        $surat->mahasiswa->semester = $semester;
-
-        return view("admin.detail.{$surat->jenis->kode_surat}", ['surat' => $surat, 'semester' => $semester]);
+        return view("admin.detail.{$surat->jenis->kode_surat}", ['surat' => $surat]);
     }
 
     public function cetak($id)
@@ -194,25 +173,8 @@ class SuratController extends Controller
         $surat = Surat::find($id);
         $surat->status_surat = "Telah Diproses";
         $surat->save();
-        $surat->perihal = html_entity_decode($surat->jenis->perihal);
-        $time = \Carbon\Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);
-
-        if ($surat->jenis_surat != 'izin-kunjungan') {
-            $batch = substr($surat->pemohon, 1, 2);
-            $enroll = \Carbon\Carbon::createFromFormat('j n y', "1 7 $batch", config('app.timezone'));
-            $roman_semester = \NumConvert::roman(intval($enroll->diffInMonths($time) / 6 + 1));
-            $formatter = new \NumberFormatter(config('app.locale'), \NumberFormatter::SPELLOUT);
-            $word_semester = ucfirst($formatter->format(ceil($enroll->diffInMonths($time) / 6)));
-            $semester = "$roman_semester ($word_semester)";
-            $surat->mahasiswa->semester = $semester;
-        } else {
-            $waktu_kunjungan = new \Carbon\Carbon($surat->izin_kunjungan->tanggal_kunjungan.' '.$surat->izin_kunjungan->waktu_kunjungan, config('app.timezone'));
-            $surat->tanggal_kunjungan = $waktu_kunjungan->isoFormat('dddd, DD MMMM YYYY');
-            $surat->waktu_kunjungan = $waktu_kunjungan->isoFormat('HH:mm \\WIB');
-        }
-
-        $surat->nomor_surat = sprintf("B-%04u/Un.05/III.4/TL.10/%02u/%u", $surat->nomor_surat, $time->month, $time->year);
-        $surat->tanggal_terbit = $time->isoFormat('DD MMMM Y');
+        $surat = setSurat($surat);
+        
         event(new \App\Events\SuratDiproses($surat));
 
         return view("surat.cetak.{$surat->jenis->kode_surat}", ['surat' => $surat]);
@@ -384,5 +346,28 @@ class SuratController extends Controller
         } catch (\Throwable $th) {
             return response()->status(500);
         }
+    }
+
+    private function setSurat($surat) {
+        $surat->perihal = html_entity_decode($surat->jenis->perihal);
+        $tanggal_terbit = \Carbon\Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);
+        $surat->nomor_surat = sprintf("B-%04u/Un.05/III.4/TL.10/%02u/%u", $surat->nomor_surat, $tanggal_terbit->month, $tanggal_terbit->year);
+        $surat->tanggal_terbit = $tanggal_terbit->isoFormat('DD MMMM Y');
+
+        if ($surat->jenis->kode_surat == 'izin-kunjungan') {
+            $waktu_kunjungan = new \Carbon\Carbon("{$surat->izin_kunjungan->tanggal_kunjungan} {$surat->izin_kunjungan->waktu_kunjungan}", config('app.timezone'));
+            $surat->tanggal_kunjungan = $waktu_kunjungan->isoFormat('dddd, DD MMMM YYYY');
+            $surat->waktu_kunjungan = $waktu_kunjungan->isoFormat('HH:mm \\WIB');
+        } else {
+            $batch = substr($surat->mahasiswa->nim, 1, 2);
+            $enroll = \Carbon\Carbon::createFromFormat('j n y', "1 7 $batch", config('app.timezone'));
+            $roman_semester = \NumConvert::roman(intval(ceil($enroll->diffInMonths($tanggal_terbit) / 6)));
+            $formatter = new \NumberFormatter(config('app.locale'), \NumberFormatter::SPELLOUT);
+            $word_semester = ucfirst($formatter->format(ceil($enroll->diffInMonths($tanggal_terbit) / 6)));
+            $semester = "$roman_semester ($word_semester)";
+            $surat->mahasiswa->semester = $semester;
+        }
+
+        return $surat;
     }
 }

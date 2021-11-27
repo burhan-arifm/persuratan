@@ -3,8 +3,9 @@
 @section('form')
 	<div class="form-group">
 		<label for="nama_mahasiswa">Nama</label>
-		<div class="col-auto">
-			<input required id="nama" name="nama_mahasiswa" type="text" placeholder="Contoh: Asep Hidayat Ramdani" class="form-control" data-toggle="tooltip" title="Isi dengan nama lengkap Anda." data-placement="top" value="{{ $surat->mahasiswa->nama }}">
+        <input required id="nama" name="nama_mahasiswa" type="text" placeholder="Contoh: Asep Hidayat Ramdani" class="form-control" data-toggle="tooltip" title="Isi dengan nama lengkap Anda." data-placement="top" value="{{ $surat->mahasiswa->nama }}">
+		<div class="invalid-feedback">
+			Wajib diisi.
 		</div>
 	</div>
 

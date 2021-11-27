@@ -26,7 +26,7 @@ class Formatter
             'nomor_surat'    => $nomor_surat,
             'jenis_surat'    => $surat->jenis->jenis_surat,
             'identitas'      => ($surat->jenis->kode_surat == 'izin-kunjungan') ? $surat->izin_kunjungan->jurusan->singkatan_program_studi : $surat->mahasiswa->nim,
-            'pemohon'        => ($surat->jenis->kode_surat == 'izin-kunjungan') ? $surat->izin_kunjungan->semester.'-'.$surat->izin_kunjungan->kelas : $surat->mahasiswa->nama,
+            'pemohon'        => ($surat->jenis->kode_surat == 'izin-kunjungan') ? "{$surat->izin_kunjungan->semester}/{$surat->izin_kunjungan->kelas}" : $surat->mahasiswa->nama,
             'waktu'          => $surat->updated_at
         );
 
