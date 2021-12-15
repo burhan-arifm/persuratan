@@ -1,6 +1,15 @@
 {
-    "cSpell.words": [
-        "beranda",
-        "endguest"
+    "cSpell.words": ["beranda", "endguest"],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 54320,
+            "driver": "PostgreSQL",
+            "name": "Docker Postgres - Persuratan",
+            "database": "persuratan-2",
+            "username": "postgres",
+            "password": "postgres"
+        }
     ]
 }
