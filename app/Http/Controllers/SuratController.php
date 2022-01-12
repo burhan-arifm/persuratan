@@ -163,7 +163,7 @@ class SuratController extends Controller
     public function detail($id)
     {
         $surat = Surat::find($id);
-        $surat = setSurat($surat);
+        $surat = $this->setSurat($surat);
 
         return view("admin.detail.{$surat->jenis->kode_surat}", ['surat' => $surat]);
     }
@@ -173,8 +173,8 @@ class SuratController extends Controller
         $surat = Surat::find($id);
         $surat->status_surat = "Telah Diproses";
         $surat->save();
-        $surat = setSurat($surat);
-        
+        $surat = $this->setSurat($surat);
+
         event(new \App\Events\SuratDiproses($surat));
 
         return view("surat.cetak.{$surat->jenis->kode_surat}", ['surat' => $surat]);
