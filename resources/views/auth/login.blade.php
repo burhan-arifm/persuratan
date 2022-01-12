@@ -37,8 +37,8 @@
                                         <input required id="identity" class="form-control" placeholder="NIP" name="identity" type="text" autofocus required autocomplete>
                                         @if($errors->get('email') || $errors->get('nip')|| $errors->get('username'))
                                             <span class="invalid-feedback" role="alert">
-                                            @foreach ($errors->all() as $error)
-                                                <strong>{{ $error->message }}</strong>
+                                            @foreach ($errors->all() as $message)
+                                                <strong>{{ $message }}</strong>
                                             @endforeach
                                             </span>
                                         @endif
