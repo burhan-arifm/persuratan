@@ -19,9 +19,9 @@ Route::group(['prefix' => 'login'], function () {
 });
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::group(['prefix' => 'pengajuan'], function ()
+Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan.'], function ()
 {
-    Route::view('/', 'surat.form.index', ['tipe_surat' => \App\JenisSurat::all()])->name('pengajuan.index');
+    Route::view('/', 'surat.form.index', ['tipe_surat' => \App\JenisSurat::all()])->name('index');
     Route::get('{kode_surat}', 'SuratController@formPengajuan')->name('form_surat');
     Route::post('ajukan', 'SuratController@ajukan')->name('ajukan_surat');
 });
@@ -47,7 +47,15 @@ Route::middleware('auth')->group(function ()
     });
     Route::group(['prefix' => 'pengaturan', 'as' => 'pengaturan.'], function ()
     {
-        Route::get('/', 'AdminController@pengaturanUmum')->name('umum');
-        Route::put('account', 'AdminController@simpanPengaturan');
+        Route::name('surat.')->group(function ()
+        {
+            Route::get('surat/{kode_surat}', 'AdminController@pengaturanSurat')->name('buka');
+            Route::put('surat/{kode_surat}', 'SuratController@pengaturanSurat')->name('simpan');
+        });
+        Route::name('akun.')->group(function ()
+        {
+            Route::view('account', 'admin.pengaturan.akun', ['tipe_surat' => \App\JenisSurat::all()])->name('buka');
+            Route::put('account', 'AdminController@simpanPengaturan')->name('simpan');
+        });
     });
 });

@@ -174,8 +174,8 @@ export default {
                 reverseButtons: true,
                 buttonsStyling: false,
                 customClass: {
-                    confirmButton: "btn btn-outline-danger m-1",
-                    cancelButton: "btn btn-secondary m-1"
+                    confirmButton: "btn btn-danger m-1",
+                    cancelButton: "btn btn-outline-primary m-1"
                 },
                 confirmButtonText: "Ya, hapus surat tersebut",
                 cancelButtonText: "Urungkan",

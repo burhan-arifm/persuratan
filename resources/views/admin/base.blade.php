@@ -38,33 +38,31 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="ph-wrench-fill align-middle"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Nav Item - Tables -->
             <li class="nav-item{{ Request::routeIs('surat.riwayat') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('surat.riwayat') }}">
                 <i class="ph-table-fill align-middle"></i>
                     <span>Persuratan</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="ph-wrench-fill align-middle"></i>
+                    <span>Pengaturan Surat</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    @foreach($tipe_surat as $surat)
+                        <a href="{{ route('pengaturan.surat.buka', ['kode_surat' => $surat->kode_surat]) }}" class="collapse-item">{{ $surat->jenis_surat }}</a>
+                    @endforeach
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -104,7 +102,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('pengaturan.akun.buka') }}">
                                     <i class="ph-gear-six-fill align-middle mr-2 text-gray-400"></i>
                                     Pengaturan Akun
                                 </a>
@@ -159,4 +157,17 @@
     <script type="text/javascript" src="{{ asset('js/vendor.admin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
     @yield('scripts')
+    @if ($message = session('message'))
+    <script>
+        Swal.fire({
+            title: '{{ $message['title'] }}',
+            icon: '{{ $message['icon'] }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+        });
+    </script>
+    @endif
 @endsection

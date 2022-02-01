@@ -6,6 +6,6 @@
 
 @section('card-body')
     @foreach($tipe_surat as $surat)
-        <a href="/pengajuan/{{ $surat->kode_surat }}" class="btn btn-primary btn-block my-2">{{ $surat->jenis_surat }}</a>
+        <a href="{{ route('pengajuan.form_surat', ['kode_surat' => $surat->kode_surat]) }}" class="btn btn-primary btn-block my-2">{{ $surat->jenis_surat }}</a>
     @endforeach
 @endsection

@@ -8,12 +8,12 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.home');
+        return view('admin.home', ['tipe_surat' => \App\JenisSurat::all()]);
     }
 
     public function semua()
     {
-        return view('admin.riwayat');
+        return view('admin.riwayat', ['tipe_surat' => \App\JenisSurat::all()]);
     }
 
     public function sunting($id)
@@ -31,18 +31,21 @@ class AdminController extends Controller
             ]);
     }
 
-    public function pengaturanUmum()
+    public function pengaturanSurat($kode_surat)
     {
-        return view('admin.pengaturan');
+        $jenis_surat = \App\JenisSurat::where('kode_surat', $kode_surat)->first();
+
+        return view("admin.pengaturan.surat", ['surat' => $jenis_surat, 'tipe_surat' => \App\JenisSurat::all()]);
     }
 
     public function simpanPengaturan(Request $request)
     {
-        
+        //TODO: validasi input pengaturan
+        //TODO: simpan pengaturan akun
     }
 
     public function laporan()
     {
-        # code...
+        //TODO: generate laporan ke dalam bentuk csv, xls, pdf, atau doc
     }
 }

@@ -20,22 +20,18 @@
                         <fieldset>
                             @csrf
                             @method('PUT')
-                
+
                             <div class="form-group">
                                 <label for="nomor_surat">Nomor Surat</label>
                                 <input required id="nomor_surat" name="nomor_surat" type="text" class="form-control" value="{{ $surat->nomor_surat }}">
-                                <div class="col-auto">
-                                </div>
                             </div>
-                
+
                             <div class="form-group">
                                 <label for="tanggal_terbit">Tanggal Terbit</label>
                                 <input required id="tanggal_terbit" type="text" class="form-control datetimepicker-input" name="tanggal_terbit" data-toggle="datetimepicker" data-target="#tanggal_terbit">
-                                <div class="col-auto">
-                                </div>
                             </div>
                             @yield('form')
-                
+
                             <div class="form-group d-flex justify-space-around">
                                 <div class="col-md-5">
                                     <button type="submit" class="btn btn-primary">Simpan</button>

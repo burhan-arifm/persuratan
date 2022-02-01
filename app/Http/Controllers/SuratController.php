@@ -295,7 +295,7 @@ class SuratController extends Controller
         ]);
         event(new \App\Events\SuratDisunting($surat));
 
-        return redirect()->route('beranda');
+        return back()->with('message', ['title' => 'Surat berhasil diperbaharui.', 'icon' => 'success']);
     }
 
     public function hapus($id)
@@ -346,6 +346,19 @@ class SuratController extends Controller
         } catch (\Throwable $th) {
             return response()->status(500);
         }
+    }
+
+    function pengaturanSurat($kode_surat, Request $request) {
+        \App\JenisSurat::find($request->id)->update([
+            'jenis_surat' => $request->jenis_surat,
+            'perihal' => $request->perihal,
+            'atas_nama' => $request->atas_nama,
+            'penanda_tangan' => $request->penanda_tangan,
+            'nip_penanda_tangan' => $request->nip_penanda_tangan,
+            'jabatan_penanda_tangan' => $request->jabatan_penanda_tangan
+        ]);
+
+        return back()->with('message', ['title' => 'Perubahan berhasil disimpan', 'icon' => 'success']);
     }
 
     private function setSurat($surat) {
