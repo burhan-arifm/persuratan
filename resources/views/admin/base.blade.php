@@ -159,14 +159,9 @@
     @yield('scripts')
     @if ($message = session('message'))
     <script>
-        Swal.fire({
+        toast.fire({
             title: '{{ $message['title'] }}',
-            icon: '{{ $message['icon'] }}',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
+            icon: '{{ $message['icon'] }}'
         });
     </script>
     @endif
