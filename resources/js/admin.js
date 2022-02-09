@@ -1,4 +1,5 @@
 require("./admin.bootstrap");
+require("./admin.modals");
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,5 +24,3 @@ Vue.component("surat-row", require("./components/SuratRow.vue").default);
 const app = new Vue({
     el: "#app"
 });
-
-require("./admin.modals");

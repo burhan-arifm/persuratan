@@ -1,9 +1,6 @@
 const Ziggy = {
-    url:
-        process.env.NODE_ENV === "production"
-            ? process.env.MIX_APP_URL
-            : "http://127.0.0.1:8000",
-    port: 8000,
+    url: window.location.origin,
+    // port: 8000,
     defaults: {},
     routes: {
         "data_surat.semua": {

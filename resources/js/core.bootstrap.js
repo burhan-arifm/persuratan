@@ -17,7 +17,7 @@ try {
     });
     window.toast = Swal.mixin({
         toast: true,
-        position: "top-end",
+        position: "top-middle",
         showConfirmButton: false,
         timer: 5000,
         timerProgressBar: true

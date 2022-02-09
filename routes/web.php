@@ -1,5 +1,6 @@
 <?php
 
+use App\JenisSurat;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'login'], function () {
-    Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
-    Route::post('/', 'Auth\LoginController@login');
-});
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Auth::routes();
+// Route::group(['prefix' => 'login'], function () {
+//     Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+//     Route::post('/', 'Auth\LoginController@login');
+// });
+// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan.'], function ()
 {
-    Route::view('/', 'surat.form.index', ['tipe_surat' => \App\JenisSurat::all()])->name('index');
+    Route::view('/', 'surat.form.index', ['tipe_surat' => JenisSurat::all()])->name('index');
     Route::get('{kode_surat}', 'SuratController@formPengajuan')->name('form_surat');
     Route::post('ajukan', 'SuratController@ajukan')->name('ajukan_surat');
 });
@@ -52,10 +54,11 @@ Route::middleware('auth')->group(function ()
             Route::get('surat/{kode_surat}', 'AdminController@pengaturanSurat')->name('buka');
             Route::put('surat/{kode_surat}', 'SuratController@pengaturanSurat')->name('simpan');
         });
-        Route::name('akun.')->group(function ()
+        Route::group(['prefix' => 'akun', 'as' => 'akun.'], function ()
         {
-            Route::view('account', 'admin.pengaturan.akun', ['tipe_surat' => \App\JenisSurat::all()])->name('buka');
-            Route::put('account', 'AdminController@simpanPengaturan')->name('simpan');
+            Route::view('/', 'admin.pengaturan.akun', ['tipe_surat' => JenisSurat::all()])->name('buka');
+            Route::put('/', 'AdminController@simpanPengaturan')->name('simpan-akun');
+            Route::put('ubah-sandi', 'Auth\ChangePasswordController@simpan')->name('ganti-sandi');
         });
     });
 });
