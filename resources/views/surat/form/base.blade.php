@@ -14,7 +14,7 @@
 @endsection
 
 @section('card-body')
-    <form action="{{route('ajukan_surat')}}" method="post" id="pengajuan-surat" class="needs-validation" novalidate>
+    <form action="{{route('pengajuan.ajukan_surat')}}" method="post" id="pengajuan-surat" class="needs-validation" novalidate>
         <fieldset>
             @csrf
             @yield('form')
