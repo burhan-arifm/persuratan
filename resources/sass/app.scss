@@ -22,5 +22,13 @@
 @import "sbadmin-2/error";
 @import "sbadmin-2/footer";
 
+.pointer {
+    cursor: pointer;
+}
+
+.table td:last-child {
+    padding: 0.5rem;
+}
+
 // Library CSS
 @import "icons";

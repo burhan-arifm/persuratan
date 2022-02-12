@@ -25,7 +25,7 @@ mix.js("resources/js/core.js", "public/js")
     .js("resources/js/form.js", "public/js")
     .extract(["jquery", "popper.js", "bootstrap"], "public/js/vendor.core.js")
     .extract(
-        ["dayjs", "vue", "laravel-echo", "pusher-js", "howler", "ziggy"],
+        ["dayjs", "alpinejs", "laravel-echo", "pusher-js", "howler", "ziggy"],
         "public/js/vendor.admin.js"
     )
     .sass("resources/sass/app.scss", "public/css")

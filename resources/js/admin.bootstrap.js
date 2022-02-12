@@ -35,13 +35,28 @@ import { Ziggy } from "./ziggy";
 window.route = (name, params, absolute) => route(name, params, absolute, Ziggy);
 
 /**
- * Vue initialization
+ * day.js initialization
  */
+import dayjs from "dayjs";
+import "dayjs/locale/id";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
 
-window.Vue = require("vue");
+dayjs.locale("id");
+dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
+window.dayjs = dayjs;
 
-Vue.mixin({
-    methods: {
-        route: (name, params, absolute) => route(name, params, absolute, Ziggy)
-    }
-});
+/**
+ * Alpine.js initialization
+ */
+import Alpine from "alpinejs";
+
+window.Alpine = Alpine;
+
+/**
+ * Howler.js initialization
+ */
+import { Howl } from "howler";
+
+window.Howl = Howl;
