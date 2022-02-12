@@ -136,30 +136,6 @@ class SuratController extends Controller
         return view("surat.saved.$request->tipe_surat", ['surat' => $surat]);
     }
 
-    public function semua()
-    {
-        $persuratan = Surat::all();
-        $letters = [];
-
-        foreach ($persuratan as $surat) {
-            $letters[] = \Format::surat_table($surat, 'semua');
-        }
-
-        return $letters;
-    }
-
-    public function terbaru()
-    {
-        $persuratan =  Surat::where('status_surat', "Belum Diproses")->get();
-        $letters = [];
-
-        foreach ($persuratan as $surat) {
-            $letters[] = \Format::surat_table($surat, 'terbaru');
-        }
-
-        return $letters;
-    }
-
     public function detail($id)
     {
         $surat = Surat::find($id);

@@ -78,15 +78,8 @@
 <script>
     Alpine.data("datatable", () => ({
         filter: "",
-        letters: [],
+        letters: @json($letters),
         csrf_token: document.head.querySelector('meta[name="csrf-token"]').content,
-        async fetchLetters() {
-            fetch("http://127.0.0.1:8000/api/data-surat/semua")
-                .then(response => response.json())
-                .then(data => {
-                    this.letters = data.map(letter => ({ ...letter, waktu_readable: dayjs(letter.waktu).format("dddd, DD MMMM YYYY HH:mm") }));
-                })
-        },
         get filteredLetters() {
             return this.letters.filter(letter => {
                 const nomorSurat = letter.nomor_surat.toLowerCase();
@@ -106,7 +99,7 @@
         get sortedLetters() {
             return this.filteredLetters.sort(
                 (a, b) => new Date(b.waktu) - new Date(a.waktu)
-            );
+            ).map(letter => ({ ...letter, waktu_readable: dayjs(letter.waktu).format("dddd, DD MMMM YYYY HH:mm") }));
         },
         detailSurat(surat) {
             Swal.fire({
@@ -259,10 +252,10 @@
         },
         init() {
             Echo.channel("persuratan").listen("surat-diajukan", payload => {
-                this.letters.push({ ...payload.surat, waktu_readable: dayjs(payload.surat.waktu).format("dddd, DD MMMM YYYY HH:mm") });
+                this.letters.push(payload.surat);
             });
             Echo.channel("persuratan").listen("surat-disunting", payload => {
-                const suratBaru = { ...payload.surat, waktu_readable: dayjs(payload.surat.waktu).format("dddd, DD MMMM YYYY HH:mm") }
+                const suratBaru = payload.surat;
                 const surat = this.letters.find(
                     surat => surat.id === payload.surat.id
                 );
@@ -296,7 +289,6 @@
                     this.letters.pop(surat);
                 }
             });
-            this.fetchLetters();
         }
     }));
     Alpine.start();

@@ -13,9 +13,3 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['prefix' => 'data-surat', 'as' => 'data_surat.'], function ()
-{
-    Route::get('semua', 'SuratController@semua')->name('semua');
-    Route::get('terbaru', 'SuratController@terbaru')->name('terbaru');
-});

@@ -14,12 +14,26 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.home', ['tipe_surat' => JenisSurat::all()]);
+        $persuratan =  Surat::where('status_surat', "Belum Diproses")->get();
+        $letters = [];
+
+        foreach ($persuratan as $surat) {
+            $letters[] = \Format::surat_table($surat, 'terbaru');
+        }
+
+        return view('admin.home', ['tipe_surat' => JenisSurat::all(), 'letters' => $letters]);
     }
 
     public function semua()
     {
-        return view('admin.riwayat', ['tipe_surat' => JenisSurat::all()]);
+        $persuratan = Surat::all();
+        $letters = [];
+
+        foreach ($persuratan as $surat) {
+            $letters[] = \Format::surat_table($surat, 'semua');
+        }
+
+        return view('admin.riwayat', ['tipe_surat' => JenisSurat::all(), 'letters' => $letters]);
     }
 
     public function sunting($id)
