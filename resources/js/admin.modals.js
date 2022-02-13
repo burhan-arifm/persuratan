@@ -16,22 +16,23 @@ window.onload = function() {
             focusConfirm: false,
             focusCancel: false,
             preConfirm: () => {
-                return axios
-                    .post(route("logout"), {
-                        headers: {
-                            "X-CSRF-TOKEN": document.querySelector(
-                                'meta[name="csrf-token"]'
-                            ).content
-                        }
-                    })
+                return fetch(route("logout"), {
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector(
+                            'meta[name="csrf-token"]'
+                        ).content
+                    },
+                    method: "POST"
+                })
                     .then(response => {
-                        if (response.status !== 204) {
-                            console.log(response);
-                            console.log(response.data);
+                        console.log(response);
+                        if (!/2[0-9]{2}/.test(response.status)) {
                             throw new Error(response.statusText);
                         }
 
-                        window.location.href = route("login");
+                        if (response.redirected) {
+                            window.location = response.url;
+                        }
                     })
                     .catch(error => {
                         modal.fire({
