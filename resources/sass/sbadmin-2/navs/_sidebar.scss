@@ -100,7 +100,7 @@
 
         &::after {
             font-weight: 900;
-            content: "\f82c";
+            content: "\fb49";
             font-family: "Phosphor";
             margin-right: 0.1rem;
         }
@@ -119,7 +119,7 @@
         overflow: hidden;
 
         #sidebarToggle::after {
-            content: "\f82d";
+            content: "\fb4a";
             font-family: "Phosphor";
             margin-left: 0.25rem;
         }
@@ -242,12 +242,12 @@
                         vertical-align: 0;
                         border: 0;
                         font-weight: 900;
-                        content: "\f82b";
+                        content: "\fb48";
                         font-family: "Phosphor";
                     }
 
                     &.collapsed::after {
-                        content: "\f82d";
+                        content: "\fb4a";
                     }
                 }
             }
