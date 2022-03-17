@@ -15,6 +15,6 @@ class PPM extends Model
 
     public function surat()
     {
-        return $this->hasMany('App\Surat', 'jenis_surat', 'kode_surat');
+        return $this->hasOne('App\Surat', 'surat');
     }
 }

@@ -13,8 +13,8 @@ class IzinRiset extends Model
         'id'
     ];
 
-    public function persuratan()
+    public function surat()
     {
-        return $this->hasOne('App\Persuratan', 'surat');
+        return $this->hasOne('App\Surat', 'surat');
     }
 }
