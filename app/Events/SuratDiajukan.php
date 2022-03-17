@@ -44,10 +44,10 @@ class SuratDiajukan implements ShouldBroadcast
         } else {
             $this->surat->izin_kunjungan;
         }
-        
+
 
         return [
-            'surat' => \Format::surat_table($this->surat, 'terbaru')
+            'surat' => \Format::surat_table($this->surat)
         ];
     }
 }

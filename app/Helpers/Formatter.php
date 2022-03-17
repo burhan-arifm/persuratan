@@ -1,22 +1,22 @@
 <?php
 namespace App\Helpers;
 
-class Formatter  
+class Formatter
 {
     /**
      * Menyesuaikan data yang diambil dengan tabel yang
      * telah ditentukan formatnya.
-     * 
+     *
      * @param $surat
      * Objek mengenai data surat yang dihimpun
-     * 
+     *
      * @param $tampilkan
      * Menampilkan surat berdasarkan status pengajuan
-     * 
+     *
      * @return Array objek yang telah diatur formatnya
      * sesuai dengan yang telah ditentukan sebemumnya
      */
-    public static function surat_table($surat, $tampilkan)
+    public static function surat_table($surat)
     {
         $time = \Carbon\Carbon::parse($surat->updated_at);
         $tanggal_terbit = \Carbon\Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);

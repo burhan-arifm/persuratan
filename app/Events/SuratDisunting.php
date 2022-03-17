@@ -46,7 +46,7 @@ class SuratDisunting implements ShouldBroadcast
         }
 
         return [
-            'surat' => \Format::surat_table($this->surat, 'terbaru')
+            'surat' => \Format::surat_table($this->surat)
         ];
     }
 }
