@@ -324,7 +324,7 @@ class SuratController extends Controller
         }
     }
 
-    function pengaturanSurat($kode_surat, Request $request) {
+    public function pengaturanSurat($kode_surat, Request $request) {
         \App\JenisSurat::find($request->id)->update([
             'jenis_surat' => $request->jenis_surat,
             'perihal' => $request->perihal,
