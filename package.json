@@ -22,9 +22,11 @@
     "dependencies": {
         "alpinejs": "^3.9.0",
         "dayjs": "^1.10.7",
+        "flatpickr": "^4.6.9",
         "howler": "^2.2.1",
         "laravel-echo": "^1.10.0",
         "pusher-js": "^7.0.6",
-        "sweetalert2": "^11.4.0"
+        "sweetalert2": "^11.4.0",
+        "xlsx": "^0.18.2"
     }
 }

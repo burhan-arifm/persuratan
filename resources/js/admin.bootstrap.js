@@ -12,7 +12,7 @@ window.Echo = new Echo({
     broadcaster: "pusher",
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    forceTLS: true
+    forceTLS: true,
 });
 
 /**
@@ -50,3 +50,10 @@ window.Alpine = Alpine;
 import { Howl } from "howler";
 
 window.Howl = Howl;
+
+/**
+ * Sheet.js initialization
+ */
+import * as XLSX from "xlsx";
+
+window.XLSX = XLSX;

@@ -18,7 +18,7 @@ class AdminController extends Controller
         $letters = [];
 
         foreach ($persuratan as $surat) {
-            $letters[] = \Format::surat_table($surat, 'terbaru');
+            $letters[] = \Format::surat_table($surat);
         }
 
         return view('admin.home', ['tipe_surat' => JenisSurat::all(), 'letters' => $letters]);
@@ -30,7 +30,17 @@ class AdminController extends Controller
         $letters = [];
 
         foreach ($persuratan as $surat) {
-            $letters[] = \Format::surat_table($surat, 'semua');
+            $formatted = \Format::surat_table($surat);
+            $surat->nomor_surat = $formatted['nomor_surat'];
+            $surat->jenis_surat = $formatted['jenis_surat'];
+            $surat->pemohon = "{$formatted['identitas']} - {$formatted['pemohon']}";
+
+            // eager loading
+            if ($surat->jenis_surat != "Izin Kunjungan") $surat->mahasiswa->jurusan;
+            // dynamic eager loading, because orm relation name between surat and tipe surat and 'kode surat' are similar
+            $surat[\str_replace("-", "_", $surat->jenis->kode_surat)];
+
+            $letters[] = $surat;
         }
 
         return view('admin.riwayat', ['tipe_surat' => JenisSurat::all(), 'letters' => $letters]);
@@ -45,10 +55,7 @@ class AdminController extends Controller
         $surat->nomor_surat = $nomor_surat;
         $surat->tanggal_terbit = $time;
 
-        return view("admin.sunting.{$surat->jenis->kode_surat}", [
-            'surat' => $surat,
-            'program_studi' => ProgramStudi::all(),
-            ]);
+        return view("admin.sunting.{$surat->jenis->kode_surat}", ['surat' => $surat, 'program_studi' => ProgramStudi::all(), 'tipe_surat' => JenisSurat::all()]);
     }
 
     public function pengaturanSurat($kode_surat)
@@ -75,10 +82,5 @@ class AdminController extends Controller
         ]);
 
         return back()->with('message', ['title' => 'Perubahan berhasil disimpan.', 'icon' => 'success']);
-    }
-
-    public function laporan()
-    {
-        //TODO: generate laporan ke dalam bentuk csv, xls, pdf, atau doc
     }
 }
