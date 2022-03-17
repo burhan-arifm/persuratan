@@ -1,0 +1,37 @@
+@use "sass:math";
+@use "sass:color";
+
+$bezier: cubic-bezier(0.23, 1, 0.32, 1) !default;
+$slideTime: 400ms !default;
+
+// calendar width calculation
+$daySize: 39px !default;
+$padding: math.div($daySize, 16) !default;
+$dayMargin: 2px !default;
+$daysWidth: ($daySize * 7 + $dayMargin * 14 + $padding * 2 + 2) !default;
+$calendarWidth: $daysWidth !default;
+
+$monthNavHeight: 34px !default;
+$weekdaysHeight: 28px !default;
+$timeHeight: 40px !default;
+
+// Colors
+
+$calendarBackground: #ffffff !default;
+$calendarBorderColor: #e6e6e6 !default;
+
+$monthForeground: color.change(black, $alpha: 0.9) !default;
+$arrow_hover_color: #f64747 !default;
+
+$monthBackground: transparent !default;
+
+$weekdaysBackground: transparent !default;
+$weekdaysForeground: color.change(black, $alpha: 0.54) !default;
+
+$dayForeground: #393939 !default;
+$dayHoverBackground: #e6e6e6 !default;
+
+$todayColor: #959ea9 !default;
+$selectedDayBackground: #569ff7 !default;
+
+$invertedBg: color.invert($calendarBackground) !default;

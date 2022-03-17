@@ -1,5 +1,6 @@
-body {
+#form {
     background-color: #db9756;
 }
 
-@import "select2/select2.scss";
+@import "select2/select2";
+@import "flatpickr/custom";

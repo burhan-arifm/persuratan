@@ -1,0 +1,30 @@
+@use "sass:color";
+
+$calendarBackground: #fefefd;
+$calendarBorderColor: color.change(#484848, $alpha: 0.1);
+
+$monthForeground: #fefefd;
+$monthBackground: #7e3000;
+
+$weekdaysBackground: #7e3000;
+$weekdaysForeground: #fefefd;
+
+$dayForeground: #1d1c1c;
+$dayHoverBackground: #e2e2e2;
+
+$todayColor: #c3c3c3;
+
+$selectedDayBackground: #7e3000;
+$selectedDayForeground: #fefefd;
+
+$noCalendarBorder: true;
+
+@import "./flatpickr";
+
+span.flatpickr-day.selected {
+    font-weight: bold;
+}
+
+.flatpickr-input[readonly] {
+    background: #fff;
+}

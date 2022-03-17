@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--CSRF Token-->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--Page Title-->
-    <title>@yield('page-title')</title>
+        <!--CSRF Token-->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!--Favicon-->
-    <link rel="icon" type="image/png" href="{{ asset('storage/favicon.ico') }}">
+        <!--Page Title-->
+        <title>@yield('page-title')</title>
 
-    <!--CSS Files Dependencies-->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @yield('additional-css')
+        <!--Favicon-->
+        <link rel="icon" type="image/png" href="{{ asset('storage/favicon.ico') }}">
 
-    <!--[if lt IE 9]>
+        <!--CSS Files Dependencies-->
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @yield('additional-css')
+
+        <!--[if lt IE 9]>
 	<script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 
-</head>
-<body>
-    @yield('body')
+    </head>
 
-    <!--Javascript Dependencies-->
-    <script type="text/javascript" src="{{ asset('js/manifest.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/vendor.core.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/core.js') }}"></script>
-    @yield('additional-scripts')
-</body>
+    <body
+        id="{{ Request::routeIs('pengajuan.index') || Request::routeIs('pengajuan.form_surat') || Request::routeIs('pengajuan.ajukan_surat') ? 'form' : '' }}">
+        @yield('body')
+
+        <!--Javascript Dependencies-->
+        <script type="text/javascript" src="{{ asset('js/manifest.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor.core.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/core.js') }}"></script>
+        @yield('additional-scripts')
+    </body>
+
 </html>

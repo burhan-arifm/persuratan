@@ -1,2 +1,2 @@
-require("./form-masking");
+require("./flatpickr");
 require("./select");
