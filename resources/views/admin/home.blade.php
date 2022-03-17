@@ -3,102 +3,110 @@
 @section('title', "Beranda")
 
 @section('main')
-    <div class="row">
-        <div class="col-md-12" x-data="datatable()">
-            <section class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Surat belum diproses</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800" x-text="letters.length"></div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="ph-envelope-fill ph-3x text-gray-300"></i>
-                                </div>
+<div class="row">
+    <div class="col-md-12" x-data="datatable()">
+        <section class="row">
+            <div class="col-md-3 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Surat belum diproses</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" x-text="letters.length"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="ph-envelope-fill ph-3x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="row">
-                <div class="col-md-12">
-                    <section class="card">
-                        <template x-if="letters.length > 0">
-                            <div class="card-body">
-                                <div class="row mb-2">
-                                    <div class="col-4 ml-2 input-group input-group-sm">
-                                        <input type="search" name="filter-input" id="filter-input" class="form-control"
-                                            placeholder="Cari surat..." x-model="filter" />
-                                    </div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-md-12">
+                <section class="card">
+                    <template x-if="letters.length > 0">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-4 ml-2 input-group input-group-sm">
+                                    <input type="search" name="filter-input" id="filter-input" class="form-control"
+                                        placeholder="Cari surat..." x-model="filter" />
                                 </div>
-                                <table class="table table-bordered table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Nomor Surat</th>
-                                            <th>Pemohon</th>
-                                            <th>Jenis Surat</th>
-                                            <th>Waktu Pengajuan</th>
-                                            <th>Opsi</th>
-                                        </tr>
-                                    </thead>
-                                    <template x-if="filteredLetters.length > 0">
-                                        <tbody>
-                                            <template x-for="(surat, index) in sortedLetters" :key="surat.id">
-                                                <tr>
-                                                    <td class="pointer text-right" @click="detailSurat(surat)" x-text="index + 1"></td>
-                                                    <td class="pointer" @click="detailSurat(surat)" x-text="surat.nomor_surat"></td>
-                                                    <td class="pointer" @click="detailSurat(surat)"
-                                                        x-text="`${surat.identitas} - ${surat.pemohon}`">
-                                                    </td>
-                                                    <td class="pointer" @click="detailSurat(surat)" x-text="surat.jenis_surat"></td>
-                                                    <td class="pointer" @click="detailSurat(surat)" x-text="surat.waktu_readable"></td>
-                                                    <td>
-                                                        <a :id="`cetak-${surat.id}`" title="Cetak Surat" :href="route('surat.cetak', { id: surat.id })"
-                                                            class="btn btn-sm btn-primary btn-icon" data-toggle="tooltip"
-                                                            data-placement="top">
-                                                            <i class="ph-xl ph-printer-fill align-middle"></i>
-                                                        </a>
-                                                        <a :id="`sunting-${surat.id}`" title="Sunting Surat" :href="route('surat.sunting', { id: surat.id })"
-                                                            class="btn btn-sm btn-outline-primary btn-icon" data-toggle="tooltip"
-                                                            data-placement="top">
-                                                            <i class="ph-xl ph-note-pencil-fill align-middle"></i>
-                                                        </a>
-                                                        <a :id="`hapus-${surat.id}`" title="Hapus Surat" href="#" @click="hapusSurat(surat.id)"
-                                                            class="btn btn-sm btn-outline-danger btn-icon" data-toggle="tooltip"
-                                                            data-placement="top">
-                                                            <i class="ph-xl ph-trash-fill align-middle"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </template>
-                                        </tbody>
-                                    </template>
-                                    <template x-if="!(filteredLetters.length > 0)">
-                                        <tbody>
+                            </div>
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Nomor Surat</th>
+                                        <th>Pemohon</th>
+                                        <th>Jenis Surat</th>
+                                        <th>Waktu Pengajuan</th>
+                                        <th>Opsi</th>
+                                    </tr>
+                                </thead>
+                                <template x-if="filteredLetters.length > 0">
+                                    <tbody>
+                                        <template x-for="(surat, index) in sortedLetters" :key="surat.id">
                                             <tr>
-                                                <td colspan="6" class="text-center">
-                                                    <h6>Tidak menemukan surat yang dimaksud. Apakah benar kata kuncinya?</h6>
+                                                <td class="pointer text-right" @click="detailSurat(surat)"
+                                                    x-text="index + 1"></td>
+                                                <td class="pointer" @click="detailSurat(surat)"
+                                                    x-text="surat.nomor_surat"></td>
+                                                <td class="pointer" @click="detailSurat(surat)"
+                                                    x-text="`${surat.identitas} - ${surat.pemohon}`">
+                                                </td>
+                                                <td class="pointer" @click="detailSurat(surat)"
+                                                    x-text="surat.jenis_surat"></td>
+                                                <td class="pointer" @click="detailSurat(surat)"
+                                                    x-text="surat.waktu_readable"></td>
+                                                <td>
+                                                    <a :id="`cetak-${surat.id}`" title="Cetak Surat"
+                                                        :href="route('surat.cetak', { id: surat.id })"
+                                                        class="btn btn-sm btn-primary btn-icon" data-toggle="tooltip"
+                                                        data-placement="top">
+                                                        <i class="ph-xl ph-printer-fill align-middle"></i>
+                                                    </a>
+                                                    <a :id="`sunting-${surat.id}`" title="Sunting Surat"
+                                                        :href="route('surat.sunting', { id: surat.id })"
+                                                        class="btn btn-sm btn-outline-primary btn-icon"
+                                                        data-toggle="tooltip" data-placement="top">
+                                                        <i class="ph-xl ph-note-pencil-fill align-middle"></i>
+                                                    </a>
+                                                    <a :id="`hapus-${surat.id}`" title="Hapus Surat" href="#"
+                                                        @click="hapusSurat(surat.id)"
+                                                        class="btn btn-sm btn-outline-danger btn-icon"
+                                                        data-toggle="tooltip" data-placement="top">
+                                                        <i class="ph-xl ph-trash-fill align-middle"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                    </template>
-                                </table>
-                            </div>
-                        </template>
-                        <template x-if="!(letters.length > 0)">
-                            <div class="card-body">
-                                <h6 class="text-center">Belum ada pengajuan surat kemahasiswaan terbaru.</h6>
-                            </div>
-                        </template>
-                    </section>
-                </div>
-            </section>
-        </div>
+                                        </template>
+                                    </tbody>
+                                </template>
+                                <template x-if="!(filteredLetters.length > 0)">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="6" class="text-center">
+                                                <h6>Tidak menemukan surat yang dimaksud. Apakah benar kata kuncinya?
+                                                </h6>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </template>
+                            </table>
+                        </div>
+                    </template>
+                    <template x-if="!(letters.length > 0)">
+                        <div class="card-body">
+                            <h6 class="text-center">Belum ada pengajuan surat kemahasiswaan terbaru.</h6>
+                        </div>
+                    </template>
+                </section>
+            </div>
+        </section>
     </div>
+</div>
 @endsection
 
 @section('scripts')

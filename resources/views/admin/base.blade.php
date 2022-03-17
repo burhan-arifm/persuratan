@@ -17,7 +17,8 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('beranda') }}">
             <div class="sidebar-brand-icon w-25">
-                <img class="img-thumbnail bg-transparent border-0" src="{{ asset('storage/uin-bandung-logo.png') }}" alt="Logo UIN Sunan Gunung Djati Bandung">
+                <img class="img-thumbnail bg-transparent border-0" src="{{ asset('storage/uin-bandung-logo.png') }}"
+                    alt="Logo UIN Sunan Gunung Djati Bandung">
             </div>
             <div class="mx-3">
                 <span class="d-block">SIMDAK</span>
@@ -31,7 +32,7 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item{{ Request::routeIs('beranda') ? ' active' : '' }}">
             <a class="nav-link" href="{{ route('beranda') }}">
-            <i class="ph-house-fill align-middle"></i>
+                <i class="ph-house-fill align-middle"></i>
                 <span>Beranda</span></a>
         </li>
 
@@ -41,7 +42,7 @@
         <!-- Nav Item - Tables -->
         <li class="nav-item{{ Request::routeIs('surat.riwayat') ? ' active' : '' }}">
             <a class="nav-link" href="{{ route('surat.riwayat') }}">
-            <i class="ph-table-fill align-middle"></i>
+                <i class="ph-table-fill align-middle"></i>
                 <span>Persuratan</span></a>
         </li>
 
@@ -58,9 +59,10 @@
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                @foreach($tipe_surat as $surat)
-                    <a href="{{ route('pengaturan.surat.buka', ['kode_surat' => $surat->kode_surat]) }}" class="collapse-item">{{ $surat->jenis_surat }}</a>
-                @endforeach
+                    @foreach($tipe_surat as $surat)
+                    <a href="{{ route('pengaturan.surat.buka', ['kode_surat' => $surat->kode_surat]) }}"
+                        class="collapse-item">{{ $surat->jenis_surat }}</a>
+                    @endforeach
                 </div>
             </div>
         </li>
@@ -86,7 +88,7 @@
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="ph-list-fill align-middle"></i>
+                    <i class="ph-list-fill align-middle"></i>
                 </button>
 
                 <!-- Topbar Navbar -->
