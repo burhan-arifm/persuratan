@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan.'], function ()
 {
-    Route::view('/', 'surat.form.index', ['tipe_surat' => JenisSurat::all()])->name('index');
+    Route::view('/', 'SuratController@daftarformPengajuan')->name('index');
     Route::get('{kode_surat}', 'SuratController@formPengajuan')->name('form_surat');
     Route::post('ajukan', 'SuratController@ajukan')->name('ajukan_surat');
 });
@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function ()
         });
         Route::group(['prefix' => 'akun', 'as' => 'akun.'], function ()
         {
-            Route::view('/', 'admin.pengaturan.akun', ['tipe_surat' => JenisSurat::all()])->name('buka');
+            Route::get('/', 'AdminController@pengaturanAkun')->name('buka');
             Route::put('/', 'AdminController@simpanPengaturan')->name('simpan-akun');
             Route::put('ubah-sandi', 'Auth\ChangePasswordController@simpan')->name('ganti-sandi');
         });

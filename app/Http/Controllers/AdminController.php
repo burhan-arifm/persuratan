@@ -65,6 +65,11 @@ class AdminController extends Controller
         return view("admin.pengaturan.surat", ['surat' => $jenis_surat, 'tipe_surat' => JenisSurat::all()]);
     }
 
+    public function pengaturanAkun()
+    {
+        return view("admin.pengaturan.akun", ['tipe_surat' => JenisSurat::all()]);
+    }
+
     public function simpanPengaturan(Request $request)
     {
         $request->validate([

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class SuratController extends Controller
 {
+    public function daftarformPengajuan()
+    {
+        return view("surat.form.index", ['tipe_surat' => JenisSurat::all()]);
+    }
+
     public function formPengajuan($kode_surat)
     {
         try {
