@@ -16,6 +16,7 @@ Karena aplikasi ini menggunakan _framework_ Laravel versi 7.29, maka spesifikasi
 2. Jalankan `composer install`.
 3. Jika pada folder tidak terdapat file **.env**, copy file **.env.example** di direktori yang sama kemudian ganti namanya menjadi **.env**.
 4. Sesuaikan dengan setup pada komputernya, mulai dari _database_, URL aplikasi, hingga layanan _broadcast_ yang digunakan.
+5. Jalankan `php artisan migrate` untuk menjalankan _migration_. Dapat ditambahkan dengan _flag_ `--seed` untuk mengisi _database_ dengan data yang telah disiapkan sebelumnya.
 
 ## Ingin memodifikasi sesuai kebutuhan?
 
