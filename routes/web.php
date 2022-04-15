@@ -1,6 +1,5 @@
 <?php
 
-use App\JenisSurat;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,51 +13,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
-// Route::group(['prefix' => 'login'], function () {
-//     Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
-//     Route::post('/', 'Auth\LoginController@login');
-// });
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::group(['prefix' => 'login'], function () {
+    Route::view('/', 'auth.login')->name('login');
+    Route::post('/', 'AdminController@login');
+});
+Route::post('logout', 'AdminController@logout')->name('logout');
 
-Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan.'], function ()
-{
-    Route::view('/', 'SuratController@daftarformPengajuan')->name('index');
+Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan.'], function () {
+    Route::get('/', 'SuratController@daftarFormPengajuan')->name('index');
     Route::get('{kode_surat}', 'SuratController@formPengajuan')->name('form_surat');
     Route::post('ajukan', 'SuratController@ajukan')->name('ajukan_surat');
 });
 
-Route::middleware('auth')->group(function ()
-{
-    Route::get('/', 'AdminController@index')->name('beranda');
-    Route::group(['prefix' => 'surat', 'as' => 'surat.'], function ()
-    {
-        Route::get('/', 'AdminController@semua')->name('riwayat');
-        Route::group(['prefix' => '{id}'], function ()
-        {
+Route::middleware('auth')->group(function () {
+    Route::get('/', 'AdminController@homeDashboard')->name('beranda');
+    Route::group(['prefix' => 'surat', 'as' => 'surat.'], function () {
+        Route::get('/', 'SuratController@semua')->name('riwayat');
+        Route::group(['prefix' => '{id}'], function () {
             Route::get('/', 'SuratController@detail')->name('detail');
             Route::get('cetak', 'SuratController@cetak')->name('cetak');
-            Route::get('sunting', 'AdminController@sunting')->name('sunting');
+            Route::get('sunting', 'SuratController@formSunting')->name('sunting');
             Route::put('sunting', 'SuratController@sunting')->name('edit');
             Route::delete('/', 'SuratController@hapus')->name('hapus');
         });
     });
-    Route::group(['prefix' => 'laporan', 'as' => 'laporan.'], function ()
-    {
+    Route::group(['prefix' => 'laporan', 'as' => 'laporan.'], function () {
         Route::get('/', 'AdminController@laporan')->name('umum');
     });
-    Route::group(['prefix' => 'pengaturan', 'as' => 'pengaturan.'], function ()
-    {
-        Route::name('surat.')->group(function ()
-        {
-            Route::get('surat/{kode_surat}', 'AdminController@pengaturanSurat')->name('buka');
-            Route::put('surat/{kode_surat}', 'SuratController@pengaturanSurat')->name('simpan');
+    Route::group(['prefix' => 'pengaturan', 'as' => 'pengaturan.'], function () {
+        Route::name('surat.')->group(function () {
+            Route::get('surat/{kode_surat}', 'SuratController@pengaturanSurat')->name('buka');
+            Route::put('surat/{kode_surat}', 'SuratController@simpanPengaturan')->name('simpan');
         });
-        Route::group(['prefix' => 'akun', 'as' => 'akun.'], function ()
-        {
+        Route::group(['prefix' => 'akun', 'as' => 'akun.'], function () {
             Route::get('/', 'AdminController@pengaturanAkun')->name('buka');
             Route::put('/', 'AdminController@simpanPengaturan')->name('simpan-akun');
-            Route::put('ubah-sandi', 'Auth\ChangePasswordController@simpan')->name('ganti-sandi');
+            Route::put('ubah-sandi', 'AdminController@simpanSandiBaru')->name('ganti-sandi');
+        });
+        Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'is_admin'], function () {
+            Route::get('/', 'AdminController@pengaturanAdmin')->name('index');
+            Route::get('/tambah', 'AdminController@formTambahAdmin')->name('formTambah');
+            Route::post('/tambah', 'AdminController@tambahAdmin')->name('tambah');
+            Route::group(['prefix' => '{id}'], function () {
+                Route::get('/password-reset', 'AdminController@resetPassword')->name('reset');
+                Route::delete('/', 'AdminController@hapusAdmin')->name('hapus');
+            });
         });
     });
 });

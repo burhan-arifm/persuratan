@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'only' => ['data_surat.*', 'surat.detail', 'surat.cetak', 'surat.sunting', 'surat.hapus', 'logout', 'login']
+    'only' => ['surat.detail', 'surat.cetak', 'surat.sunting', 'surat.hapus', 'logout', 'pengaturan.admin.reset', 'pengaturan.admin.hapus']
 ];

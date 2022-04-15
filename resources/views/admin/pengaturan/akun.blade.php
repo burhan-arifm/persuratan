@@ -28,12 +28,10 @@ Pengaturan Akun
                                 @method('PUT')
                                 <div class="form-group">
                                     <label `for="name">Nama</label>
-                                    <input required id="name" name="name" type="text" class="form-control"
-                                        data-toggle="tooltip" title="Masukkan nama Anda" data-placement="top"
+                                    <input required id="name" name="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" data-toggle="tooltip"
+                                        title="Masukkan nama Anda" data-placement="top"
                                         value="{{ Auth::user()->name }}">
-                                    <div class="invalid-feedback">
-                                        Wajib diisi.
-                                    </div>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -42,12 +40,10 @@ Pengaturan Akun
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input required id="username" name="username" type="text" class="form-control"
+                                    <input required id="username" name="username" type="text"
+                                        class="form-control @error('username') is-invalid @enderror"
                                         data-toggle="tooltip" title="Masukkan username Anda" data-placement="top"
                                         value="{{ Auth::user()->username }}">
-                                    <div class="invalid-feedback">
-                                        Wajib diisi.
-                                    </div>
                                     @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -56,11 +52,9 @@ Pengaturan Akun
                                 </div>
                                 <div class="form-group">
                                     <label for="nip">NIP</label>
-                                    <input id="nip" name="nip" type="text" class="form-control" data-toggle="tooltip"
+                                    <input id="nip" name="nip" type="text"
+                                        class="form-control @error('nip') is-invalid @enderror" data-toggle="tooltip"
                                         title="Masukkan NIP Anda" data-placement="top" value="{{ Auth::user()->nip }}">
-                                    <div class="invalid-feedback">
-                                        Wajib diisi.
-                                    </div>
                                     @error('nip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,12 +63,10 @@ Pengaturan Akun
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input id="email" name="email" type="email" class="form-control"
-                                        data-toggle="tooltip" title="Masukkan e-mail Anda" data-placement="top"
+                                    <input id="email" name="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" data-toggle="tooltip"
+                                        title="Masukkan e-mail Anda" data-placement="top"
                                         value="{{ Auth::user()->email }}">
-                                    <div class="invalid-feedback">
-                                        Wajib diisi.
-                                    </div>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -97,7 +89,7 @@ Pengaturan Akun
                                 <div class="form-group">
                                     <label for="current_password">Password Lama</label>
                                     <input id="current_password" name="current_password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror"
+                                        class="form-control @error('current_password') is-invalid @enderror"
                                         data-toggle="tooltip" title="Masukkan password lama Anda" data-placement="top"
                                         autocomplete="current-password">
                                     @error('current_password')
@@ -109,7 +101,7 @@ Pengaturan Akun
                                 <div class="form-group">
                                     <label for="new_password">Password Baru</label>
                                     <input id="new_password" name="new_password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror"
+                                        class="form-control @error('new_password') is-invalid @enderror"
                                         data-toggle="tooltip" title="Masukkan password baru Anda" data-placement="top"
                                         autocomplete="new-password">
                                     @error('new_password')
@@ -121,12 +113,14 @@ Pengaturan Akun
                                 <div class="form-group">
                                     <label for="new_password_confirmation">Konfirmasi Password Baru</label>
                                     <input id="new_password_confirmation" name="new_password_confirmation"
-                                        type="password" class="form-control" data-toggle="tooltip"
-                                        title="Masukkan kembali password baru Anda" data-placement="top"
-                                        autocomplete="new-password">
-                                    <div class="invalid-feedback">
-                                        Wajib diisi.
-                                    </div>
+                                        type="password" class="form-control @error('new_password') is-invalid @enderror"
+                                        data-toggle="tooltip" title="Masukkan kembali password baru Anda"
+                                        data-placement="top" autocomplete="new-password">
+                                    @error('new_password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group d-flex justify-space-around">
                                     <button type="submit" class="btn btn-primary">Simpan</button>

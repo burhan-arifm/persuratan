@@ -11,7 +11,7 @@ class Admin extends Authenticable
     use Notifiable, UseUuid;
 
     protected $fillable = [
-        'name', 'nip', 'username', 'email', 'password',
+        'name', 'nip', 'username', 'email', 'password', 'is_admin'
     ];
 
     protected $hidden = [

@@ -36,9 +36,12 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label for="identity">NIP / username / e-mail</label>
-                                    <input required id="identity" class="form-control" placeholder="NIP" name="identity"
-                                        type="text" autofocus required autocomplete>
-                                    @if($errors->get('email') || $errors->get('nip')|| $errors->get('username'))
+                                    <input required id="identity" class="form-control @if($errors->get('identity') || $errors->get('email') || $errors->get('nip')||
+                                        $errors->get('username')) is-invalid @endif" placeholder="NIP" name="identity"
+                                        type="text" required{{ $errors->has('password') ? '': ' autofocus' }}
+                                        autocomplete value="{{ old('identity') }}">
+                                    @if($errors->get('identity') || $errors->get('email') || $errors->get('nip')||
+                                    $errors->get('username'))
                                     <span class="invalid-feedback" role="alert">
                                         @foreach ($errors->all() as $message)
                                         <strong>{{ $message }}</strong>
@@ -49,7 +52,8 @@
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input required class="form-control @error('password') is-invalid @enderror"
-                                        placeholder="Password" type="password" name="password" required autocomplete>
+                                        placeholder="Password" type="password" name="password" required
+                                        @error('password') autofocus @enderror autocomplete>
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -58,8 +62,11 @@
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" value="Remember Me"><span
-                                            class="mx-2">Ingat Saya</span>
+                                        <input type="checkbox" name="remember"
+                                            {{ old('remember') == 'on' ? ' checked' : ''}}>
+                                        <span class="mx-2">
+                                            Ingat Saya
+                                        </span>
                                     </label>
                                 </div>
                                 <input class="btn btn-primary" type="submit" value="Login">
@@ -71,6 +78,11 @@
         </div>
     </div>
 </main>
+@if ($errors)
+@php
+echo $errors;
+@endphp
+@endif
 <footer class="sticky-footer w-100 fixed-bottom">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">

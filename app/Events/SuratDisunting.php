@@ -2,10 +2,9 @@
 
 namespace App\Events;
 
+use App\Helpers\Formatter as Format;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -46,7 +45,7 @@ class SuratDisunting implements ShouldBroadcast
         }
 
         return [
-            'surat' => \Format::surat_table($this->surat)
+            'surat' => Format::surat_table($this->surat)
         ];
     }
 }

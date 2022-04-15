@@ -79,8 +79,6 @@
 <!--tabel surat-->
 @endsection
 
-
-
 @section('scripts')
 <script>
     Alpine.data("datatable", () => ({

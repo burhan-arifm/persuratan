@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'NIP/Kata Sandi salah.',
+    'failed' => 'Kata Sandi salah.',
     'throttle' => 'Terlalu banyak percobaan. Mohon coba lagi dalam :seconds detik.',
 
 ];

@@ -67,6 +67,15 @@
             </div>
         </li>
 
+        @if (Auth::user()->is_admin)
+        <li
+            class="nav-item{{ Request::routeIs('pengaturan.admin') || Request::routeIs('pengaturan.admin.formTambah') ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('pengaturan.admin.index') }}">
+                <i class="ph-user-fill align-middle"></i>
+                <span>Pengaturan Akun Admin</span></a>
+        </li>
+        @endif
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
@@ -161,10 +170,23 @@
 @yield('scripts')
 @if ($message = session('message'))
 <script>
+    @if (array_key_exists('modal', $message) && $message['modal'] == true)
+    modal.fire({
+        icon: '{{ $message['icon'] }}',
+        title: '{{ $message['title'] }}',
+        html: '{!! $message['text'] !!}',
+        showCloseButton: true,
+        buttonsStyling: false,
+        customClass: {
+            confirmButton: "btn btn-danger m-1"
+        },
+    });
+    @else
     toast.fire({
         title: '{{ $message['title'] }}',
         icon: '{{ $message['icon'] }}'
     });
+    @endif
 </script>
 @endif
 @endsection
