@@ -61,36 +61,6 @@ class JenisSuratSeeder extends Seeder
             'nip_penanda_tangan' => '196808141995031003',
             'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
         ]);
-        // Surat Permohonan Uji Komprehensif
-        \App\JenisSurat::create([
-            'kode_surat' => 'permohonan-komprehensif',
-            'jenis_surat' => 'Uji Komprehensif',
-            'perihal' => htmlentities('Permohonan Ujian<br>Komprehensif'),
-            'atas_nama' => '',
-            'penanda_tangan' => '',
-            'nip_penanda_tangan' => '',
-            'jabatan_penanda_tangan' => ''
-        ]);
-        // Surat Permohonan Ujian Munaqasah
-        \App\JenisSurat::create([
-            'kode_surat' => 'permohonan-munaqasah',
-            'jenis_surat' => 'Ujian Munaqasah',
-            'perihal' => htmlentities('Permohonan Ujian<br>Munaqasah/Skripsi'),
-            'atas_nama' => '',
-            'penanda_tangan' => '',
-            'nip_penanda_tangan' => '',
-            'jabatan_penanda_tangan' => ''
-        ]);
-        // Surat Pernyataan Masih Kuliah
-        \App\JenisSurat::create([
-            'kode_surat' => 'pernyataan-masih-kuliah',
-            'jenis_surat' => 'Pernyataan Masih Kuliah',
-            'perihal' => '',
-            'atas_nama' => 'Dekan',
-            'penanda_tangan' => 'Asep Rohendi, M.Ag.',
-            'nip_penanda_tangan' => '196209101991031002',
-            'jabatan_penanda_tangan' => 'Kepala Bagian Tata Usaha'
-        ]);
         // Surat Permohonan Izin PPM
         \App\JenisSurat::create([
             'kode_surat' => 'ppm',
@@ -101,15 +71,45 @@ class JenisSuratSeeder extends Seeder
             'nip_penanda_tangan' => '196808141995031003',
             'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Akademik'
         ]);
-        // Surat Keterangan
-        \App\JenisSurat::create([
-            'kode_surat' => 'surat-keterangan',
-            'jenis_surat' => 'Surat Keterangan',
-            'perihal' => '',
-            'atas_nama' => 'Dekan',
-            'penanda_tangan' => 'Dadan Suherdiana',
-            'nip_penanda_tangan' => '196808141995031003',
-            'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Kemahasiswaan'
-        ]);
+        // // Surat Permohonan Uji Komprehensif
+        // \App\JenisSurat::create([
+        //     'kode_surat' => 'permohonan-komprehensif',
+        //     'jenis_surat' => 'Uji Komprehensif',
+        //     'perihal' => htmlentities('Permohonan Ujian<br>Komprehensif'),
+        //     'atas_nama' => '',
+        //     'penanda_tangan' => '',
+        //     'nip_penanda_tangan' => '',
+        //     'jabatan_penanda_tangan' => ''
+        // ]);
+        // // Surat Permohonan Ujian Munaqasah
+        // \App\JenisSurat::create([
+        //     'kode_surat' => 'permohonan-munaqasah',
+        //     'jenis_surat' => 'Ujian Munaqasah',
+        //     'perihal' => htmlentities('Permohonan Ujian<br>Munaqasah/Skripsi'),
+        //     'atas_nama' => '',
+        //     'penanda_tangan' => '',
+        //     'nip_penanda_tangan' => '',
+        //     'jabatan_penanda_tangan' => ''
+        // ]);
+        // // Surat Pernyataan Masih Kuliah
+        // \App\JenisSurat::create([
+        //     'kode_surat' => 'pernyataan-masih-kuliah',
+        //     'jenis_surat' => 'Pernyataan Masih Kuliah',
+        //     'perihal' => '',
+        //     'atas_nama' => 'Dekan',
+        //     'penanda_tangan' => 'Asep Rohendi, M.Ag.',
+        //     'nip_penanda_tangan' => '196209101991031002',
+        //     'jabatan_penanda_tangan' => 'Kepala Bagian Tata Usaha'
+        // ]);
+        // // Surat Keterangan
+        // \App\JenisSurat::create([
+        //     'kode_surat' => 'surat-keterangan',
+        //     'jenis_surat' => 'Surat Keterangan',
+        //     'perihal' => '',
+        //     'atas_nama' => 'Dekan',
+        //     'penanda_tangan' => 'Dadan Suherdiana',
+        //     'nip_penanda_tangan' => '196808141995031003',
+        //     'jabatan_penanda_tangan' => 'Wakil Dekan Bidang Kemahasiswaan'
+        // ]);
     }
 }
