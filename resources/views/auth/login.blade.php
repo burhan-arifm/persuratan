@@ -78,11 +78,6 @@
         </div>
     </div>
 </main>
-@if ($errors)
-@php
-echo $errors;
-@endphp
-@endif
 <footer class="sticky-footer w-100 fixed-bottom">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
