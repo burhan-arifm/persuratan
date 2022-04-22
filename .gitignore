@@ -11,15 +11,19 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 
+.node-version
+.php-version
+
 # Yarn related stuff
 yarn-error.log
 .yarn
 .yarnrc.yml
 
 # Ziggy must be regenerated!
-resources/js/ziggy.js
+/resources/js/ziggy.js
 
 # Built stuff, better rebuild it again in ur servers
 /public/js
 /public/css
 /public/fonts
+/public/mix-manifest.json
