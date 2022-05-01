@@ -3,8 +3,6 @@
 @section('form-name', 'Izin Riset')
 
 @section('detail-form')
-<input type="hidden" name="tipe_surat" value="izin-riset">
-
 <div class="form-group">
     <label for="lokasi_riset">Nama Instansi/Tempat Penelitian</label>
     <input required class="form-control" id="lokasi_riset" name="lokasi_riset" placeholder="Contoh: PT Jaya Abadi"

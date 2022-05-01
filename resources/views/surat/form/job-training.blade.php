@@ -3,8 +3,6 @@
 @section('form-name', 'Izin Job Training')
 
 @section('detail-form')
-<input type="hidden" name="tipe_surat" value="job-training">
-
 <div class="form-group">
     <label for="instansi_penerima">Nama Instansi/Lembaga</label>
     <input required class="form-control" id="instansi_penerima" name="instansi_penerima"

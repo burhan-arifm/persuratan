@@ -3,8 +3,6 @@
 @section('form-name', 'Izin PPM')
 
 @section('detail-form')
-<input type="hidden" name="tipe_surat" value="ppm">
-
 <div class="form-group">
     <label for="instansi_penerima">Nama Instansi/Lembaga</label>
     <input required class="form-control" id="instansi_penerima" name="instansi_penerima"

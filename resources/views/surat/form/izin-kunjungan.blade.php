@@ -3,8 +3,6 @@
 @section('form-name', "Izin Kunjungan")
 
 @section('form')
-<input type="hidden" name="tipe_surat" value="izin-kunjungan">
-
 <div class="form-group">
     <label for="instansi_penerima">Tujuan Kunjungan</label>
     <input required id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Contoh: PT Jaya Abadi"

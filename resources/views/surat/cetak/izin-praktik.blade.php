@@ -11,7 +11,7 @@
                 Kepada Yth.<br>
                 <b>{{ $surat->izin_praktik->instansi_penerima }}</b><br>
                 {{ $surat->izin_praktik->alamat_instansi }}<br>
-                {{ $surat->izin_praktik->alamat_lokasi }}
+                {{ $surat->izin_praktik->kota_lokasi }}
             </p>
         </div>
         <!-- end of Penerima Surat -->

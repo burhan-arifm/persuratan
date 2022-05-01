@@ -3,8 +3,6 @@
 @section('form-name', 'Izin Observasi')
 
 @section('detail-form')
-<input type="hidden" name="tipe_surat" value="izin-observasi">
-
 <div class="form-group">
     <label for="pembimbing_studi">Dosen Pembimbing Studi</label>
     <input required id="pembimbing_studi" name="pembimbing_studi" type="text" class="form-control"

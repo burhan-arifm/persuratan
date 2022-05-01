@@ -19,7 +19,7 @@ class SuratDihapus implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(\App\Surat $surat)
+    public function __construct($surat)
     {
         $this->surat = $surat;
     }

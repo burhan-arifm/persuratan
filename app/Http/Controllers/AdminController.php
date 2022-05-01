@@ -21,7 +21,20 @@ class AdminController extends Controller
         $request->validate(['identity'  => 'required|string']);
         $username = function () {
             $login = request()->only(['identity']);
-            $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : (filter_var($login, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/[0-9]{18}|[0-9]{8}.[0-9]{6}.[1|2]{1}.[0-9]{3}|[0-9]{8} [0-9]{6} [1|2]{1} [0-9]{3}|[0-9]{18}/'))) ? 'nip' : 'username');
+            $field = filter_var($login['identity'], FILTER_VALIDATE_EMAIL)
+                ? 'email'
+                : (filter_var(
+                    $login['identity'],
+                    FILTER_VALIDATE_REGEXP,
+                    array(
+                        'options' => array(
+                            'regexp' => '/[0-9]{18}|[0-9]{8}.[0-9]{6}.[1|2]{1}.[0-9]{3}|[0-9]{8} [0-9]{6} [1|2]{1} [0-9]{3}|[0-9]{18}/'
+                        )
+                    )
+                )
+                    ? 'nip'
+                    : 'username'
+                );
             if ($field == 'nip') {
                 $login = str_replace(array('.', ' '), '', $login['identity']);
                 request()->merge([$field => $login]);
@@ -30,11 +43,16 @@ class AdminController extends Controller
             }
             return $field;
         };
-        $request->validate([
+        $credentials = request()->only([$username(), 'password']);
+        $validator = Validator::make($credentials, [
             $username() => 'required|exists:admins',
             'password' => 'required|string',
         ]);
-        $credentials = request()->only([$username(), 'password']);
+        if ($validator->fails()) {
+            return redirect()->route('login')
+                ->withInput($request->only('remember'))
+                ->withErrors($validator);
+        }
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);

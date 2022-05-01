@@ -14,8 +14,8 @@ Formulir Pengajuan Surat @yield('form-name')
 @endsection
 
 @section('card-body')
-<form action="{{route('pengajuan.ajukan_surat')}}" method="post" id="pengajuan-surat" class="needs-validation"
-    novalidate>
+<form action="{{route('pengajuan.ajukan_surat', ['kode_surat' => $kode_surat])}}" method="post" id="pengajuan-surat"
+    class="needs-validation" novalidate>
     <fieldset>
         @csrf
         @yield('form')

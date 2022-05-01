@@ -21,15 +21,15 @@ class SuratController extends Controller
     public function formPengajuan($kode_surat)
     {
         try {
-            return view("surat.form.$kode_surat", ['program_studi' => \App\ProgramStudi::all()]);
+            return view("surat.form.$kode_surat", ['program_studi' => \App\ProgramStudi::all(), 'kode_surat' => $kode_surat]);
         } catch (\Throwable $th) {
             abort(404);
         }
     }
 
-    public function ajukan(Request $request)
+    public function ajukan($kode_surat, Request $request)
     {
-        if ($request->tipe_surat == "izin-kunjungan") {
+        if ($kode_surat == "izin-kunjungan") {
             $program_studi = \App\ProgramStudi::where("kode_program_studi", $request->program_studi)->first();
             $detail = \App\IzinKunjungan::create([
                 'instansi_penerima' => $request->instansi_penerima,
@@ -48,14 +48,14 @@ class SuratController extends Controller
             $mahasiswa = Mahasiswa::updateOrCreate(
                 ['nim' => $request->nim],
                 [
-                    'nama' => $request->nama_mahasiswa,
+                    'nama' => $request->nama,
                     'program_studi' => \App\ProgramStudi::where("kode_program_studi", $request->program_studi)->first()->id,
                     'alamat' => $request->alamat,
                 ]
             );
             $pemohon = $mahasiswa->nim;
 
-            switch ($request->tipe_surat) {
+            switch ($kode_surat) {
                 case 'izin-observasi':
                     $mahasiswa->pembimbing_studi = $request->pembimbing_studi;
                     $mahasiswa->save();
@@ -136,15 +136,15 @@ class SuratController extends Controller
             : 0;
         $surat = Surat::create([
             'nomor_surat' => $surat_terakhir + 1,
-            'jenis_surat' => \App\JenisSurat::where('kode_surat', $request->tipe_surat)->first()->id,
+            'jenis_surat' => \App\JenisSurat::where('kode_surat', $kode_surat)->first()->id,
             'pemohon' => $pemohon,
             'surat' => $detail->id,
             'status_surat' => "Belum Diproses",
-            'tanggal_terbit' => Carbon::now()
+            'tanggal_terbit' => Carbon::now()->toDateString()
         ]);
         event(new \App\Events\SuratDiajukan($surat));
 
-        return view("surat.saved.$request->tipe_surat", ['surat' => $surat]);
+        return view("surat.saved.$kode_surat", ['surat' => $surat]);
     }
 
     public function semua()
@@ -171,10 +171,18 @@ class SuratController extends Controller
 
     public function detail($id)
     {
-        $surat = Surat::find($id);
-        $surat = $this->setSurat($surat);
+        try {
+            $surat = Surat::find($id);
+            if ($surat) {
+                $surat = $this->setSurat($surat);
 
-        return view("admin.detail.{$surat->jenis->kode_surat}", ['surat' => $surat]);
+                return view("admin.detail.{$surat->jenis->kode_surat}", ['surat' => $surat]);
+            }
+
+            return response('Surat tidak ditemukan.', 404);
+        } catch (\Throwable $th) {
+            return response('Internal Server Error', 500);
+        }
     }
 
     public function cetak($id)
@@ -325,48 +333,53 @@ class SuratController extends Controller
         try {
             $surat = Surat::find($id);
 
-            switch ($surat->jenis->kode_surat) {
-                case 'izin-kunjungan':
-                    \App\IzinKunjungan::destroy($surat->surat);
-                    break;
-                case 'izin-observasi':
-                    \App\IzinObservasi::destroy($surat->surat);
-                    break;
-                case 'izin-praktik':
-                    \App\IzinPraktik::destroy($surat->surat);
-                    break;
-                case 'izin-riset':
-                    \App\IzinRiset::destroy($surat->surat);
-                    break;
-                case 'job-training':
-                    \App\JobTraining::destroy($surat->surat);
-                    break;
-                case 'ppm':
-                    \App\PPM::destroy($surat->surat);
-                    break;
-                    // case 'permohonan-komprehensif':
-                    //     \App\Komprehensif::destroy($surat->surat);
-                    //     break;
-                    // case 'permohonan-munaqasah':
-                    //     \App\Munaqasah::destroy($surat->surat);
-                    //     break;
-                    // case 'pernyataan-masih-kuliah':
-                    //     \App\MasihKuliah::destroy($surat->surat);
-                    //     break;
-                    // case 'surat-keterangan':
-                    //     \App\Keterangan::destroy($surat->surat);
-                    //     break;
+            if ($surat) {
+                switch ($surat->jenis->kode_surat) {
+                    case 'izin-kunjungan':
+                        \App\IzinKunjungan::destroy($surat->surat);
+                        break;
+                    case 'izin-observasi':
+                        \App\IzinObservasi::destroy($surat->surat);
+                        break;
+                    case 'izin-praktik':
+                        \App\IzinPraktik::destroy($surat->surat);
+                        break;
+                    case 'izin-riset':
+                        \App\IzinRiset::destroy($surat->surat);
+                        break;
+                    case 'job-training':
+                        \App\JobTraining::destroy($surat->surat);
+                        break;
+                    case 'ppm':
+                        \App\PPM::destroy($surat->surat);
+                        break;
+                        // case 'permohonan-komprehensif':
+                        //     \App\Komprehensif::destroy($surat->surat);
+                        //     break;
+                        // case 'permohonan-munaqasah':
+                        //     \App\Munaqasah::destroy($surat->surat);
+                        //     break;
+                        // case 'pernyataan-masih-kuliah':
+                        //     \App\MasihKuliah::destroy($surat->surat);
+                        //     break;
+                        // case 'surat-keterangan':
+                        //     \App\Keterangan::destroy($surat->surat);
+                        //     break;
 
-                default:
+                    default:
+                        break;
+                }
+
+                Surat::destroy($id);
+
+                event(new \App\Events\SuratDihapus($id));
+
+                return response()->noContent();
             }
 
-            Surat::destroy($id);
-
-            event(new \App\Events\SuratDihapus($surat));
-
-            return response()->status(200);
+            return response('Surat tidak ditemukan.', 404);
         } catch (\Throwable $th) {
-            return response()->status(500);
+            return response('Internal Server Error', 500);
         }
     }
 

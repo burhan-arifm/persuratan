@@ -3,8 +3,6 @@
 @section('form-name', 'Izin Praktik Mata Kuliah')
 
 @section('detail-form')
-<input type="hidden" name="tipe_surat" value="izin-praktik">
-
 <div class="form-group">
     <label for="instansi_penerima">Tujuan Observasi</label>
     <input required id="instansi_penerima" name="instansi_penerima" type="text" placeholder="Contoh: PT. Jaya Abadi"

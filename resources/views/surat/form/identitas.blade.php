@@ -2,9 +2,9 @@
 
 @section('form')
 <div class="form-group">
-    <label for="nama_mahasiswa">Nama</label>
-    <input required id="nama" name="nama_mahasiswa" type="text" placeholder="Contoh: Asep Hidayat Ramdani"
-        class="form-control" data-toggle="tooltip" title="Isi dengan nama lengkap Anda." data-placement="top">
+    <label for="nama">Nama</label>
+    <input required id="nama" name="nama" type="text" placeholder="Contoh: Asep Hidayat Ramdani" class="form-control"
+        data-toggle="tooltip" title="Isi dengan nama lengkap Anda." data-placement="top">
     <div class="invalid-feedback">
         Wajib diisi.
     </div>

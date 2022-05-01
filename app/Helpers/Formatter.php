@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 class Formatter
@@ -18,7 +19,6 @@ class Formatter
      */
     public static function surat_table($surat)
     {
-        $time = \Carbon\Carbon::parse($surat->updated_at);
         $tanggal_terbit = \Carbon\Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);
         $nomor_surat = sprintf("B-%04u/Un.05/III.4/TL.10/%02u/%u", $surat->nomor_surat, $tanggal_terbit->month, $tanggal_terbit->year);
         $letter = array(

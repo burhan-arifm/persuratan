@@ -5,9 +5,6 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
@@ -18,7 +15,6 @@
             <exclude>
                 <directory suffix=".php">./app/Console</directory>
                 <directory suffix=".php">./app/Exceptions</directory>
-                <directory suffix=".php">./app/Http/Controllers/Auth</directory>
                 <file>./app/Http/Controllers/Controller.php</file>
                 <directory suffix=".php">./app/Http/Middleware</directory>
                 <file>./app/Http/Kernel.php</file>

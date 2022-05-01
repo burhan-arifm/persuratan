@@ -22,7 +22,7 @@ Route::post('logout', 'AdminController@logout')->name('logout');
 Route::group(['prefix' => 'pengajuan', 'as' => 'pengajuan.'], function () {
     Route::get('/', 'SuratController@daftarFormPengajuan')->name('index');
     Route::get('{kode_surat}', 'SuratController@formPengajuan')->name('form_surat');
-    Route::post('ajukan', 'SuratController@ajukan')->name('ajukan_surat');
+    Route::post('{kode_surat}', 'SuratController@ajukan')->name('ajukan_surat');
 });
 
 Route::middleware('auth')->group(function () {

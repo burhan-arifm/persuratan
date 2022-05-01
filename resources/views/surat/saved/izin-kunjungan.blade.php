@@ -60,8 +60,8 @@
 </div>
 
 @php
-$waktu_kunjungan = new \Carbon\Carbon($surat->izin_kunjungan->tanggal_kunjungan.'
-'.$surat->izin_kunjungan->waktu_kunjungan, config('app.timezone'));
+$waktu_kunjungan_string = "{$surat->izin_kunjungan->tanggal_kunjungan} {$surat->izin_kunjungan->waktu_kunjungan}";
+$waktu_kunjungan = new \Carbon\Carbon($waktu_kunjungan_string, config('app.timezone'));
 @endphp
 <div class="row">
     <div class="col-md-4"><strong>Tanggal Kunjungan</strong></div>

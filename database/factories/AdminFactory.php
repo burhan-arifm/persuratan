@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Admin;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -17,12 +17,20 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Admin::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'name' => $faker->name(),
+        'nip' => "{$faker->date('Ymd')}{$faker->date('Ym')}{$faker->numberBetween(1, 2)}{$faker->numerify('0##')}",
+        'username' => $faker->userName(),
+        'email' => $faker->unique()->safeEmail(),
+        'password' => $faker->password(),
+        'is_admin' => false,
         'remember_token' => Str::random(10),
+    ];
+});
+
+$factory->state(Admin::class, 'superadmin', function () {
+    return [
+        'is_admin' => true
     ];
 });
