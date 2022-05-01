@@ -19,8 +19,8 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         $request->validate(['identity'  => 'required|string']);
-        $username = function () {
-            $login = request()->only(['identity']);
+        $username = function () use ($request) {
+            $login = $request->only(['identity']);
             $field = filter_var($login['identity'], FILTER_VALIDATE_EMAIL)
                 ? 'email'
                 : (filter_var(
@@ -37,13 +37,13 @@ class AdminController extends Controller
                 );
             if ($field == 'nip') {
                 $login = str_replace(array('.', ' '), '', $login['identity']);
-                request()->merge([$field => $login]);
+                $request->merge([$field => $login]);
             } else {
-                request()->merge([$field => $login['identity']]);
+                $request->merge([$field => $login['identity']]);
             }
             return $field;
         };
-        $credentials = request()->only([$username(), 'password']);
+        $credentials = $request->only([$username(), 'password']);
         $validator = Validator::make($credentials, [
             $username() => 'required|exists:admins',
             'password' => 'required|string',
