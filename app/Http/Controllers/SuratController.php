@@ -201,131 +201,145 @@ class SuratController extends Controller
     {
         $surat = Surat::find($id);
 
-        $time = Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);
-        $nomor_surat = sprintf("B-%04u/Un.05/III.4/TL.10/%02u/%u", $surat->nomor_surat, $time->month, $time->year);
-        $surat->nomor_surat = $nomor_surat;
-        $surat->tanggal_terbit = $time;
+        if ($surat) {
+            $time = Carbon::createFromFormat('Y-m-d', $surat->tanggal_terbit);
+            $nomor_surat = sprintf("B-%04u/Un.05/III.4/TL.10/%02u/%u", $surat->nomor_surat, $time->month, $time->year);
+            $surat->nomor_surat = $nomor_surat;
+            $surat->tanggal_terbit = $time;
 
-        return view("admin.sunting.{$surat->jenis->kode_surat}", ['surat' => $surat, 'program_studi' => ProgramStudi::all(), 'tipe_surat' => JenisSurat::all()]);
+            return view(
+                "admin.sunting.{$surat->jenis->kode_surat}",
+                [
+                    'surat' => $surat,
+                    'program_studi' => ProgramStudi::all(),
+                    'tipe_surat' => JenisSurat::all()
+                ]
+            );
+        }
+
+        abort(404);
     }
 
     public function sunting($id, Request $request)
     {
         $surat = Surat::find($id);
 
-        if ($surat->jenis->kode_surat == "izin-kunjungan") {
-            $program_studi = \App\ProgramStudi::where("kode_program_studi", $request->program_studi)->first();
-            $detail = \App\IzinKunjungan::find($surat->surat)->update([
-                'instansi_penerima' => $request->instansi_penerima,
-                'alamat_instansi'   => $request->alamat_instansi,
-                'kota_instansi'     => $request->kota_instansi,
-                'mata_kuliah'       => $request->mata_kuliah,
-                'program_studi'     => $program_studi->id,
-                'semester'          => $request->semester,
-                'kelas'             => $request->kelas,
-                'dosen_pengampu'    => $request->dosen_pengampu,
-                'tanggal_kunjungan' => Carbon::parseFromLocale($request->tanggal_kunjungan, config('app.locale'))->format("Y-m-d"),
-                'waktu_kunjungan'   => $request->waktu_kunjungan
-            ]);
-            $pemohon = "$program_studi->singkatan_program_studi $request->semester-$request->kelas";
-        } else {
-            $mahasiswa = Mahasiswa::updateOrCreate(
-                ['nim' => $request->nim],
-                [
-                    'nama' => $request->nama_mahasiswa,
-                    'program_studi' => \App\ProgramStudi::where("kode_program_studi", $request->program_studi)->first()->id,
-                    'alamat' => $request->alamat,
-                ]
-            );
-            $pemohon = $mahasiswa->nim;
+        if ($surat) {
+            if ($surat->jenis->kode_surat == "izin-kunjungan") {
+                $program_studi = \App\ProgramStudi::where("kode_program_studi", $request->program_studi)->first();
+                \App\IzinKunjungan::find($surat->surat)->update([
+                    'instansi_penerima' => $request->instansi_penerima,
+                    'alamat_instansi'   => $request->alamat_instansi,
+                    'kota_instansi'     => $request->kota_instansi,
+                    'mata_kuliah'       => $request->mata_kuliah,
+                    'program_studi'     => $program_studi->id,
+                    'semester'          => $request->semester,
+                    'kelas'             => $request->kelas,
+                    'dosen_pengampu'    => $request->dosen_pengampu,
+                    'tanggal_kunjungan' => Carbon::parseFromLocale($request->tanggal_kunjungan, config('app.locale'))->format("Y-m-d"),
+                    'waktu_kunjungan'   => $request->waktu_kunjungan
+                ]);
+                $pemohon = "$program_studi->singkatan_program_studi $request->semester-$request->kelas";
+            } else {
+                $mahasiswa = Mahasiswa::updateOrCreate(
+                    ['nim' => $request->nim],
+                    [
+                        'nama' => $request->nama,
+                        'program_studi' => \App\ProgramStudi::where("kode_program_studi", $request->program_studi)->first()->id,
+                        'alamat' => $request->alamat,
+                    ]
+                );
+                $pemohon = $mahasiswa->nim;
 
-            switch ($surat->jenis->kode_surat) {
-                case 'izin-observasi':
-                    $mahasiswa->pembimbing_studi = $request->pembimbing_studi;
-                    $mahasiswa->save();
-                    \App\IzinObservasi::find($surat->surat)->update([
-                        'lokasi_observasi'  => $request->lokasi_observasi,
-                        'alamat_lokasi'     => $request->alamat_lokasi,
-                        'kota_lokasi'       => $request->kota_lokasi,
-                        'topik_skripsi'     => $request->topik_skripsi
-                    ]);
-                    break;
-                case 'izin-praktik':
-                    \App\IzinPraktik::find($surat->surat)->update([
-                        'instansi_penerima' => $request->instansi_penerima,
-                        'alamat_instansi' => $request->alamat_instansi,
-                        'kota_lokasi'       => $request->kota_lokasi,
-                        'mata_kuliah' => $request->mata_kuliah,
-                        'dosen_pengampu' => $request->dosen_pengampu
-                    ]);
-                    break;
-                case 'izin-riset':
-                    \App\IzinRiset::find($surat->surat)->update([
-                        'lokasi_riset'  => $request->lokasi_riset,
-                        'alamat_lokasi' => $request->alamat_lokasi,
-                        'kota_lokasi'   => $request->kota_lokasi,
-                        'judul_skripsi' => $request->judul_skripsi,
-                        'pembimbing_1'  => $request->pembimbing_1,
-                        'pembimbing_2'  => $request->pembimbing_2
-                    ]);
-                    break;
-                case 'job-training':
-                    \App\JobTraining::find($surat->surat)->update([
-                        'instansi_penerima' => $request->instansi_penerima,
-                        'alamat_instansi' => $request->alamat_instansi,
-                        'kota_lokasi'       => $request->kota_lokasi,
-                        'dosen_pembimbing' => $request->dosen_pembimbing
-                    ]);
-                    break;
-                case 'ppm':
-                    \App\PPM::find($surat->surat)->update([
-                        'instansi_penerima' => $request->instansi_penerima,
-                        'alamat_instansi' => $request->alamat_instansi,
-                        'kota_lokasi'       => $request->kota_lokasi,
-                        'dosen_pembimbing' => $request->dosen_pembimbing
-                    ]);
-                    break;
-                    // case 'permohonan-munaqasah':
-                    //     \App\PermohonanMunaqasah::find($surat->surat)->update([
-                    //         'judul_skripsi' => $request->judul_skripsi,
-                    //         'pembimbing_1' => $request->pembimbing_1,
-                    //         'pembimbing_2' => $request->pembimbing_2
-                    //     ]);
-                    //     break;
-                    // case 'pernyataan-masih-kuliah':
-                    //     $pangol = explode(" - ", $request->pangkat_golongan);
-                    //     \App\MasihKuliah::find($surat->surat)->update([
-                    //         'nama_orang_tua' => $request->nama_orang_tua,
-                    //         'nip_orang_tua' => $request->nip_orang_tua,
-                    //         'pangkat' => $pangol[0],
-                    //         'golongan' => $pangol[1],
-                    //         'instansi' => $request->instansi
-                    //     ]);
-                    //     break;
-                    // case 'surat-keterangan':
-                    //     \App\Keterangan::find($surat->surat)->update([
-                    //         'keperluan' => $request->keperluan
-                    //     ]);
-                    //     break;
-                    // case 'permohonan-komprehensif':
+                switch ($surat->jenis->kode_surat) {
+                    case 'izin-observasi':
+                        $mahasiswa->pembimbing_studi = $request->pembimbing_studi;
+                        $mahasiswa->save();
+                        \App\IzinObservasi::find($surat->surat)->update([
+                            'lokasi_observasi'  => $request->lokasi_observasi,
+                            'alamat_lokasi'     => $request->alamat_lokasi,
+                            'kota_lokasi'       => $request->kota_lokasi,
+                            'topik_skripsi'     => $request->topik_skripsi
+                        ]);
+                        break;
+                    case 'izin-praktik':
+                        \App\IzinPraktik::find($surat->surat)->update([
+                            'instansi_penerima' => $request->instansi_penerima,
+                            'alamat_instansi' => $request->alamat_instansi,
+                            'kota_lokasi'       => $request->kota_lokasi,
+                            'mata_kuliah' => $request->mata_kuliah,
+                            'dosen_pengampu' => $request->dosen_pengampu
+                        ]);
+                        break;
+                    case 'izin-riset':
+                        \App\IzinRiset::find($surat->surat)->update([
+                            'lokasi_riset'  => $request->lokasi_riset,
+                            'alamat_lokasi' => $request->alamat_lokasi,
+                            'kota_lokasi'   => $request->kota_lokasi,
+                            'judul_skripsi' => $request->judul_skripsi,
+                            'pembimbing_1'  => $request->pembimbing_1,
+                            'pembimbing_2'  => $request->pembimbing_2
+                        ]);
+                        break;
+                    case 'job-training':
+                        \App\JobTraining::find($surat->surat)->update([
+                            'instansi_penerima' => $request->instansi_penerima,
+                            'alamat_instansi' => $request->alamat_instansi,
+                            'kota_lokasi'       => $request->kota_lokasi,
+                            'dosen_pembimbing' => $request->dosen_pembimbing
+                        ]);
+                        break;
+                    case 'ppm':
+                        \App\PPM::find($surat->surat)->update([
+                            'instansi_penerima' => $request->instansi_penerima,
+                            'alamat_instansi' => $request->alamat_instansi,
+                            'kota_lokasi'       => $request->kota_lokasi,
+                            'dosen_pembimbing' => $request->dosen_pembimbing
+                        ]);
+                        break;
+                        // case 'permohonan-munaqasah':
+                        //     \App\PermohonanMunaqasah::find($surat->surat)->update([
+                        //         'judul_skripsi' => $request->judul_skripsi,
+                        //         'pembimbing_1' => $request->pembimbing_1,
+                        //         'pembimbing_2' => $request->pembimbing_2
+                        //     ]);
+                        //     break;
+                        // case 'pernyataan-masih-kuliah':
+                        //     $pangol = explode(" - ", $request->pangkat_golongan);
+                        //     \App\MasihKuliah::find($surat->surat)->update([
+                        //         'nama_orang_tua' => $request->nama_orang_tua,
+                        //         'nip_orang_tua' => $request->nip_orang_tua,
+                        //         'pangkat' => $pangol[0],
+                        //         'golongan' => $pangol[1],
+                        //         'instansi' => $request->instansi
+                        //     ]);
+                        //     break;
+                        // case 'surat-keterangan':
+                        //     \App\Keterangan::find($surat->surat)->update([
+                        //         'keperluan' => $request->keperluan
+                        //     ]);
+                        //     break;
+                        // case 'permohonan-komprehensif':
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
+
+            $nomor = explode("/", $request->nomor_surat);
+            $nomor_surat = explode("-", $nomor[0]);
+            $surat->find($id)->update([
+                'nomor_surat'    => intval($nomor_surat[1]),
+                'pemohon'        => $pemohon,
+                'status_surat'   => "Belum Diproses",
+                'tanggal_terbit' => Carbon::parseFromLocale($request->tanggal_terbit, config('app.locale'))->format("Y-m-d"),
+            ]);
+            event(new \App\Events\SuratDisunting($surat));
+
+            return redirect()->route('surat.riwayat')->with('message', ['title' => 'Surat berhasil diperbaharui.', 'icon' => 'success']);
         }
 
-
-        $nomor = explode("/", $request->nomor_surat);
-        $nomor_surat = explode("-", $nomor[0]);
-        $surat->find($id)->update([
-            'nomor_surat'    => intval($nomor_surat[1]),
-            'pemohon'        => $pemohon,
-            'status_surat'   => "Belum Diproses",
-            'tanggal_terbit' => Carbon::parseFromLocale($request->tanggal_terbit, config('app.locale'))->format("Y-m-d"),
-        ]);
-        event(new \App\Events\SuratDisunting($surat));
-
-        return redirect()->route('surat.riwayat')->with('message', ['title' => 'Surat berhasil diperbaharui.', 'icon' => 'success']);
+        abort(404);
     }
 
     public function hapus($id)

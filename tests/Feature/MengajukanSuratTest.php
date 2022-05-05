@@ -101,9 +101,13 @@ class MengajukanSuratTest extends TestCase
             'program_studi' => $this->faker->randomElement($kodeProdis),
         ])->toArray();
         $dataForms["izin-kunjungan"] = $dataSurats["izin-kunjungan"];
-        $dataSurats["izin-kunjungan"] = array_filter($dataSurats["izin-kunjungan"], function ($key) {
-            return $key != 'program_studi';
-        }, ARRAY_FILTER_USE_KEY);
+        $dataSurats["izin-kunjungan"] = array_filter(
+            $dataSurats["izin-kunjungan"],
+            function ($key) {
+                return $key != 'program_studi';
+            },
+            ARRAY_FILTER_USE_KEY
+        );
 
         // test loops
         foreach ($kodeSurats as $kodeSurat) {
