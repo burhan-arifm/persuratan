@@ -29,4 +29,3 @@ jobs:
       - name: Run Testsuite
         run: |
           php artisan test
-          php artisan dusk
