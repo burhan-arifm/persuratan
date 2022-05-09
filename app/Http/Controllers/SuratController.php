@@ -328,7 +328,7 @@ class SuratController extends Controller
 
             $nomor = explode("/", $request->nomor_surat);
             $nomor_surat = explode("-", $nomor[0]);
-            $surat->find($id)->update([
+            $surat->update([
                 'nomor_surat'    => intval($nomor_surat[1]),
                 'pemohon'        => $pemohon,
                 'status_surat'   => "Belum Diproses",
@@ -399,23 +399,41 @@ class SuratController extends Controller
 
     public function pengaturanSurat($kode_surat)
     {
-        $jenis_surat = JenisSurat::where('kode_surat', $kode_surat)->first();
+        $jenisSurat = JenisSurat::where('kode_surat', $kode_surat)->first();
 
-        return view("admin.pengaturan.surat", ['surat' => $jenis_surat, 'tipe_surat' => JenisSurat::all()]);
+        if ($jenisSurat) {
+            return view("admin.pengaturan.surat", ['surat' => $jenisSurat, 'tipe_surat' => JenisSurat::all()]);
+        }
+
+        abort(404);
     }
 
-    public function simpanPengaturan(Request $request)
+    public function simpanPengaturan($kode_surat, Request $request)
     {
-        \App\JenisSurat::find($request->id)->update([
-            'jenis_surat' => $request->jenis_surat,
-            'perihal' => $request->perihal,
-            'atas_nama' => $request->atas_nama,
-            'penanda_tangan' => $request->penanda_tangan,
-            'nip_penanda_tangan' => $request->nip_penanda_tangan,
-            'jabatan_penanda_tangan' => $request->jabatan_penanda_tangan
-        ]);
+        $jenisSurat = JenisSurat::where('kode_surat', $kode_surat)->first();
 
-        return redirect()->route('beranda')->with('message', ['title' => 'Perubahan berhasil disimpan', 'icon' => 'success']);
+        if ($jenisSurat) {
+            $jenisSurat->update([
+                'jenis_surat' => $request->jenis_surat,
+                'perihal' => $request->perihal,
+                'atas_nama' => $request->atas_nama,
+                'penanda_tangan' => $request->penanda_tangan,
+                'nip_penanda_tangan' => $request->nip_penanda_tangan,
+                'jabatan_penanda_tangan' => $request->jabatan_penanda_tangan
+            ]);
+
+            return redirect()
+                ->route('beranda')
+                ->with(
+                    'message',
+                    [
+                        'title' => "Perubahan pada komponen surat {$jenisSurat->jenis_Surat} berhasil disimpan",
+                        'icon' => 'success'
+                    ]
+                );
+        }
+
+        abort(404);
     }
 
     private function setSurat($surat)
